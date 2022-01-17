@@ -70,7 +70,7 @@ scoop install bucket\<app>.json
 Simplest solution is to use an RegEx and it will match it to the source of `homepage`. Example: [go](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json)
 
 ```json
-"homepage": "<https://golang.org">,
+"homepage": "<https://golang.org>",
 "checkver": "Build version go([\\d\\.]+)\\."
 ```
 
