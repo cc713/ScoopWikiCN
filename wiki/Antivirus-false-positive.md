@@ -1,3 +1,3 @@
-Some antivirus software can give a false positive when running the https://get.scoop.sh script which prevents Scoop from installing properly.
+一些杀毒软件可能会在运行 https://get.scoop.sh 脚本时误报, 导致 Scoop 无法正确安装.
 
-This is only an issue when using PowerShell 5.1 and can be avoided by using PowerShell 7.0.
+这是只在用 PowerShell 5.1 时遇到的问题, 可以通过用 PowerShell 7.0 避免.
