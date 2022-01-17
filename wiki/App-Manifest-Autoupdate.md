@@ -1,82 +1,82 @@
-Auto Update is a tool for package maintainers. It automatically checks for new versions of an app and updates the manifest accordingly. It helps to eliminate much of the tedium of updating manifests, as well as reducing the risk of human error while doing so.
+Auto Update 是为包维护者提供的工具. 它会自动检查应用程序的新版本, 并相应地更新清单. 它有助于消除更新清单的许多繁琐工作, 同时降低人为错误的风险.
 
-Here you will find an in-depth explanation of how the `autoupdate` part of an app manifest works.
+这里你可以找到应用清单 `autoupdate` 部分工作的深入解释.
 
-# Using `checkver.ps1` to query and autoupdate
+# 使用 `checkver.ps1` 查询和自动更新
 
-Use `checkver.ps1` to query the current version of either a specific app or all apps of a bucket. If an updated version existed, you can autoupdate manifest by `checkver.ps1` too.
+用 `checkver.ps1` 查询 bucket 中特定应用或所有应用的当前版本. 如果更新版本存在, 你也可以用 `checkver.ps1` 自动更新清单.
 
-## Querying current version
+## 查询当前版本
 
-Open a PowerShell/cmd, then `cd` into **scoop**'s root directory (`apps\scoop\current`) or the buckets repository directory and run the following commands.
+打开 PowerShell/cmd, 然后 `cd` 到 **scoop** 根目录 (`apps\scoop\current`) 或 buckets 存储库目录, 并运行以下命令.
 
-To query the current version of a specific app in the bucket, run:
+要查询 bucket 中特定应用的当前版本, 运行:
 
 ```powershell
 .\bin\checkver.ps1 <app>
 # or .\bin\checkver.ps1 -App <app>
 ```
 
-To query the current version of all apps in the bucket, run:
+要查询 bucket 中所有应用的当前版本, 运行:
 
 ```powershell
 .\bin\checkver.ps1 *
 # or .\bin\checkver.ps1 -App *
 ```
 
-## Updating manifest
+## 更新清单
 
-In the output of `checkver.ps1`, you can see if an outdated app has autoupdate available. If so, you can run the following command to automatically update the respective app's manifest (using `*` will update all apps)
+在 `checkver.ps1` 的输出中, 你可以看到过时的应用是否有自动更新. 如果是, 你可以运行以下命令自动更新相应应用的清单 (使用 `*` 会更新所有应用)
 
 ```powershell
 .\bin\checkver.ps1 <app> -u
 # or .\bin\checkver.ps1 -App <app> -Update
 ```
 
-To query apps that not in `bucket` directory (e.g. `.`, `.\TODO`, etc.), specify the directory as the second argument to `checkver.ps1`
+要查询不在 `bucket` 目录中的应用 (例如 `.`, `.\TODO`, 等等), 指定目录作为 `checkver.ps1` 的第二参数
 
 ```powershell
 .\bin\checkver.ps1 <app> <dir> -u
 # or .\bin\checkver.ps1 -App <app> -Dir <dir> -Update
 ```
 
-It is recommended to verify that the updated manifest still works by installing the app with the following command
+推荐验证更新后清单是否有效, 使用以下命令安装应用
 
 ```powershell
 scoop install bucket\<app>.json
 ```
 
-## Parameters of `checkver.ps1`
+## `checkver.ps1` 的参数
 
 - `-App` (`-a APP`)
-  - Manifest name to search.
-  - Placeholders (`*`) are supported.
+  - 要搜索的清单名.
+  - 支持占位符 (`*`).
 - `-Dir` (`-d DIR`)
-  - Where to search for manifest(s).
+  - 搜索清单的位置.
 - `-Update` (`-u`)
-  - Update given manifest.
+  - 更新给定的清单.
 - `-ForceUpdate` (`-f`)
-  - Check manifest(s) and update, even if there is no new version.
+  - 检查清单并更新, 即使没有新版本.
 - `-SkipUpdated` (`-s`)
-  - Check given manifest(s), and list only outdated manifest(s).
+  - 检查给定清单, 只列出过时的清单.
 - `-Version` (`-v VER`)
-  - Check given manifest(s) using a given version `VER`.
-  - Usually used with `-u` to update to a certain version.
+  - 使用给定的版本 `Ver` 检查给定清单.
+  - 通常使用 `-u` 更新到特定版本.
 
-# Adding `checkver` to a manifest
+# 添加 `checkver` 到清单
 
-## Using RegEx in `checkver`
+## 在 `checkver` 中使用正则表达式
 
-Simplest solution is to use an RegEx and it will match it to the source of `homepage`. Example: [go](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json)
+最简单的解决方案是用正则表达式, 它会匹配 `homepage` 的源代码. 例子: [go](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json)
 
 ```json
 "homepage": "<https://golang.org>",
 "checkver": "Build version go([\\d\\.]+)\\."
 ```
 
-If you're not familiar with RegEx or want to test if your RegEx matches on the right text you can use an online tool ([RegEx101](https://regex101.com/) or [RegExr](https://regexr.com/)).
+如果你不熟悉正则表达式或想测试你的正则表达式是否匹配正确文本, 可以使用在线工具 ([RegEx101](https://regex101.com/) 或 [RegExr](https://regexr.com/)).
 
-Use another url if the `homepage` doesn't contain the version. Example: [7zip](https://github.com/ScoopInstaller/Main/blob/master/bucket/7zip.json)
+如果 `homepage` 不包含 version/版本, 使用其它 url. 例子: [7zip](https://github.com/ScoopInstaller/Main/blob/master/bucket/7zip.json)
 
 ```json
 "homepage": "https://www.7-zip.org/",
@@ -86,9 +86,9 @@ Use another url if the `homepage` doesn't contain the version. Example: [7zip](h
 }
 ```
 
-## Using JSONPath in `checkver`
+## 在 `checkver` 中使用 JSONPath
 
-Use a JSON endpoint with [JSONPath expressions](https://goessner.net/articles/JsonPath/) to retrieve the version. Either dot-notation or bracket-notation can be used. Example: [mro](https://github.com/ScoopInstaller/Main/blob/master/bucket/mro.json)
+使用 JSON 端点配合 [JSONPath 表达式](https://goessner.net/articles/JsonPath/) 获取版本. 可以使用点标记或括号标记. 例子: [mro](https://github.com/ScoopInstaller/Main/blob/master/bucket/mro.json)
 
 ```json
 "checkver": {
@@ -97,9 +97,9 @@ Use a JSON endpoint with [JSONPath expressions](https://goessner.net/articles/Js
 }
 ```
 
-If you're not familiar with JSONPath or want to test if your JSONPath matches on the right text you can use an online tool ([JSONPath Expression Tester](https://jsonpath.curiousconcept.com/)).
+如果你不熟悉 JSONPath 或想测试你的 JSONPath 是否匹配正确文本, 你可以使用在线工具 ([JSONPath Expression Tester](https://jsonpath.curiousconcept.com/)).
 
-There could be a JSONPath query in `checkver.jsonpath`, and so does RegEx ([sample reference](https://www.newtonsoft.com/json/help/html/RegexQuery.htm)). Example: [nuget](https://github.com/ScoopInstaller/Main/blob/master/bucket/nuget.json)
+`checkver.jsonpath` 中可以有 JSONPath 查询, 也可以有正则表达式 ([样本参考](https://www.newtonsoft.com/json/help/html/RegexQuery.htm)). 例子: [nuget](https://github.com/ScoopInstaller/Main/blob/master/bucket/nuget.json)
 
 ```json
 "checkver": {
@@ -108,9 +108,9 @@ There could be a JSONPath query in `checkver.jsonpath`, and so does RegEx ([samp
     }
 ```
 
-## Using RegEx with JSONPath in `checkver`
+## 在 `checkver` 中同时使用正则表达式和 JSONPath
 
-If `checkver.regex` and `checkver.jsonpath` are all assigned, **scoop** use `checkver.jsonpath` to extract a string which `checkver.regex` is matched to to find the version. Example: [nwjs](https://github.com/lukesampson/scoop-extras/blob/master/bucket/nwjs.json)
+如果 `checkver.regex` 和 `checkver.jsonpath` 都被赋值, **scoop** 用 `checkver.jsonpath` 提取匹配 `checkver.regex` 的字符串查找版本. 例子: [nwjs](https://github.com/lukesampson/scoop-extras/blob/master/bucket/nwjs.json)
 
 ```json
 "checkver": {
@@ -120,16 +120,16 @@ If `checkver.regex` and `checkver.jsonpath` are all assigned, **scoop** use `che
 }
 ```
 
-## Special Cases
+## 特殊情况
 
-Use the latest app release on Github by setting `checkver` to `github` and the `homepage` to the repository URL. This will try to match the tag with `\/releases\/tag\/(?:v|V)?([\d.]+)`. *The app author has to use Github's release feature for this to work. Pre-releases will be ignored!* Example: [nvm](https://github.com/ScoopInstaller/Main/blob/master/bucket/nvm.json)
+通过设置 `checkver` 为 `github`, `homepage` 为存储库 URL, 使用最新的 app release. 这会尝试用 `\/releases\/tag\/(?:v|V)?([\d.]+)` 匹配 tag/标签. *应用作者必须使用 Github 的 Release 功能才能正常工作. 预发布将被忽略!* 例子: [nvm](https://github.com/ScoopInstaller/Main/blob/master/bucket/nvm.json)
 
 ```json
 "homepage": "https://github.com/coreybutler/nvm-windows",
 "checkver": "github"
 ```
 
-Or use different urls for the homepage and repository. Example: [cmder](https://github.com/ScoopInstaller/Main/blob/master/bucket/cmder.json)
+或为 homepage 和 repository 使用不同 url. 例子: [cmder](https://github.com/ScoopInstaller/Main/blob/master/bucket/cmder.json)
 
 ```json
 "homepage": "http://cmder.net",
@@ -138,7 +138,7 @@ Or use different urls for the homepage and repository. Example: [cmder](https://
 }
 ```
 
-Use `checkver.reverse: true` to let `checkver.regex` match the last occurrence found (default is to match the first occurrence). Example: [x264](https://github.com/ScoopInstaller/Main/blob/master/bucket/x264.json)
+用 `checkver.reverse: true` 让 `checkver.regex` 匹配找到的最后一个匹配项 (默认匹配第一个). 例子: [x264](https://github.com/ScoopInstaller/Main/blob/master/bucket/x264.json)
 
 ```json
 "checkver": {
@@ -148,9 +148,9 @@ Use `checkver.reverse: true` to let `checkver.regex` match the last occurrence f
 }
 ```
 
-Use capture groups in `checkver.regex` will make [captured variables](#captured-variables) that could be used in `checkver.replace` for complex versions or in [`autoupdate`](#adding-autoupdate-to-a-manifest) property.
+在 `checkver.regex` 中使用捕获组会让 [捕获变量](#captured-variables) 可用于 `checkver.replace` 匹配复杂版本 或 [`autoupdate`](#adding-autoupdate-to-a-manifest) 属性.
 
-This example will provide `$matchVersion` and `$matchShort` as variables (used in `autoupdate`). Example: [git](https://github.com/ScoopInstaller/Main/blob/master/bucket/git.json)
+这个例子会提供 `$matchVersion` 和 `$matchShort` 作为变量 (用于 `autoupdate`). 例子: [git](https://github.com/ScoopInstaller/Main/blob/master/bucket/git.json)
 
 ```json
 "checkver": {
@@ -159,7 +159,7 @@ This example will provide `$matchVersion` and `$matchShort` as variables (used i
 }
 ```
 
-This example will provide `${1}, ${2}, ${3}` (used in `checkver.replace`) and `$matchSha` (used in `autoupdate`) as variables. Example: [pshazz](https://github.com/ScoopInstaller/Main/blob/master/bucket/pshazz.json)
+这个例子会提供 `${1}, ${2}, ${3}` (用于 `checkver.replace`) 和 `$matchSha` (用于 `autoupdate`) 作为变量. 例子: [pshazz](https://github.com/ScoopInstaller/Main/blob/master/bucket/pshazz.json)
 
 ```json
 "checkver": {
@@ -169,7 +169,7 @@ This example will provide `${1}, ${2}, ${3}` (used in `checkver.replace`) and `$
 }
 ```
 
-## Properties of `checkver`
+## `checkver` 的属性
 
 - `checkver`: "regex". RegEx for finding the version on the `homepage`
   - `github`: "uri". URL to the app's Github repository
@@ -184,10 +184,9 @@ This example will provide `${1}, ${2}, ${3}` (used in `checkver.replace`) and `$
   - `useragent`: "string". User-Agent that used to get webpage content (only used in [fiddler](https://github.com/lukesampson/scoop-extras/blob/master/bucket/fiddler.json))
     - Supports [version variables](#version-variables)
 
-# Adding `autoupdate` to a manifest
+# 添加 `autoupdate` 到清单
 
-For the autoupdate feature to work it needs a [`checkver`](#adding-checkver-to-a-manifest) property
- to find the latest version number.
+要让自动更新功能工作, 需要 [`checkver`](#adding-checkver-to-a-manifest) 属性找到最新版本号.
 
 ```json
 "autoupdate": {
@@ -203,7 +202,7 @@ For the autoupdate feature to work it needs a [`checkver`](#adding-checkver-to-a
 }
 ```
 
-Some example manifests using the `autoupdate` feature:
+一些使用 `autoupdate` 功能的示例清单:
 
 - [nodejs](https://github.com/ScoopInstaller/Main/blob/master/bucket/nodejs.json)
 
@@ -310,7 +309,7 @@ Some examples using the `autoupdate` feature with [captured variables](#captured
 }
 ```
 
-## Properties of `autoupdate`
+## `autoupdate` 的属性
 
 Most of the [manifest properties](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests) could be added into `autoupdate`: `bin`, `extract_dir`, `extract_to`, `env_add_path`, `env_set`, `installer`, `license`, `note`, `persist`, `post_install`, `psmodule`, `shortcuts`, and the most important ones, `url` and `hash`.
 
@@ -318,7 +317,7 @@ All the properties except `autoupdate.note` can be set globally for all architec
 
 All the properties except `hash` support [captured variables](#captured-variables) and [version variables](#version-variables), and `hash` has its own [property](#adding-hash-to-autoupdate) for obtaining hash values without download the actual files.
 
-# Adding `hash` to `autoupdate`
+# 添加 `hash` 到 `autoupdate`
 
 There are several ways to obtain the hash of the new file. If the app provider publishes hash values it is possible to extract these from their website or hashfile. If nothing is defined or something goes wrong while getting the hash values the target files will be downloaded and hashed locally.
 
@@ -330,7 +329,7 @@ Hash value can be directly extracted by the following method (`autoupdate.hash.m
 - Using Digest for RDF file (`rdf`)
 - Using download header or `.meta4` for [Metalink](http://www.metalinker.org) (`metalink`)
 
-## Specifying URL in `hash.url`
+## 在 `hash.url` 中指定 url
 
 `url` in `hash` property accepts URL with [captured variables](#captured-variables), [version variables](#version-variables) or [URL variables](#url-variables).
 
@@ -374,13 +373,13 @@ Hash value can be directly extracted by the following method (`autoupdate.hash.m
 }
 ```
 
-## Getting hash from plain text file or webpage
+## 从纯文本文件或网页获取 hash
 
-If the app provider publishes hash value in a plain text file or on some webpage, `checkver.ps1` could extract it by using proper RegEx.
+如果应用提供者公开 hash value/哈希值为纯文本文件或在某些网页上, `checkver.ps1` 可以通过使用合适的正则表达式提取它.
 
-### Using Built-in RegEx in `autoupdate.hash`
+### 在 `autoupdate.hash` 使用内置正则表达式
 
-There are some *default* RegEx that built in **scoop**, i.e., `^([a-fA-F0-9]+)$` and `([a-fA-F0-9]{32,128})[\x20\t]+.*$basename(?:[\x20\t]+\d+)?`.
+有一些 *默认* 正则表达式内置于 **scoop**, 例如, `^([a-fA-F0-9]+)$` 和 `([a-fA-F0-9]{32,128})[\x20\t]+.*$basename(?:[\x20\t]+\d+)?`.
 
 ```powershell
 # ^([a-fA-F0-9]+)$
@@ -389,11 +388,11 @@ abcdef0123456789abcdef0123456789abcdef01
 abcdef0123456789abcdef0123456789abcdef01 *example.zip
 ```
 
-See [above](#specifying-url-in-hashurl) for examples.
+例子见 [上](#在-hash.url-中指定-url).
 
-### Using customized RegEx in `autoupdate.hash`
+### 在 `autoupdate.hash` 中使用自定义正则表达式
 
-If built-in RegEx is not suitable, customized RegEx could be used to extract hash value. [Hash variables](#hash-variables) (`$md5`, `$sha1`, `$sha256`, and etc.) could be used to simplify the expression.
+如果内置正则表达式不适用, 自定义正则表达式可用于提取 hash value/哈希值. [Hash 变量](#hash-variables) (`$md5`, `$sha1`, `$sha256`, 等等) 可用于简化表达式.
 
 - [curl](https://github.com/ScoopInstaller/Main/blob/master/bucket/curl.json)
 
@@ -413,22 +412,22 @@ If built-in RegEx is not suitable, customized RegEx could be used to extract has
 }
 ```
 
-### Special cases for FossHub and SourceForge
+### FossHub 和 SourceForge 的特殊情况
 
-There are two predefined special cases: [FossHub](https://www.fosshub.com) and [SourceForge](https://sourceforge.net).
+有两种预定义的特殊情况: [FossHub](https://www.fosshub.com) 和 [SourceForge](https://sourceforge.net).
 
 - FossHub
-  - URL pattern: `^(?:.*fosshub.com\/).*(?:\/|\?dwl=)(?<filename>.*)$`
+  - URL 格式: `^(?:.*fosshub.com\/).*(?:\/|\?dwl=)(?<filename>.*)$`
     - `https://www.fosshub.com/Calibre.html?dwl=calibre-64bit-3.44.0.msi`
     - `https://www.fosshub.com/Calibre.html/calibre-64bit-3.44.0.msi`
   - RegEx: `$basename.*?"sha256":"([a-fA-F0-9]{64})"`
 - SourceForge
-  - URL pattern: `(?:downloads\.)?sourceforge.net\/projects?\/(?<project>[^\/]+)\/(?:files\/)?(?<file>.*)`
+  - URL 格式: `(?:downloads\.)?sourceforge.net\/projects?\/(?<project>[^\/]+)\/(?:files\/)?(?<file>.*)`
     - `https://downloads.sourceforge.net/project/nsis/NSIS%203/3.04/nsis-3.04.zip`
     - `https://sourceforge.net/projects/nsis/files/NSIS%203/3.04/nsis-3.04.zip`
   - RegEx: `"$basename":.*?"sha1":\s"([a-fA-F0-9]{40})"`
 
-For `autoupdate.url`s that match above patterns, hash mode is setted to `fosshub` or `sourceforge` automatically and `hash` property is not needed.
+对于匹配以上格式的 `autoupdate.url`, hash 模式自动设置为 `fosshub` 或 `sourceforge` 而无需 `hash` 属性.
 
 - [calibre](https://github.com/ScoopInstaller/Main/blob/master/bucket/curl.json)
 
@@ -447,7 +446,7 @@ For `autoupdate.url`s that match above patterns, hash mode is setted to `fosshub
 }
 ```
 
-## Getting hash from JSON file
+## 从 JSON 文件获取 hash
 
 For JSON file, use a JSON endpoint with [JSONPath expressions](https://goessner.net/articles/JsonPath/) to retrieve the hash. Either dot-notation or bracket-notation can be used. Example: [openssl](https://github.com/ScoopInstaller/Main/blob/master/bucket/openssl.json)
 
@@ -469,7 +468,7 @@ There could be a JSONPath query in `autoupdate.hash.jsonpath`, and so does RegEx
 }
 ```
 
-## Getting hash from XML file
+## 从 XML 文件获取 hash
 
 Use XPath to retrieve the hash from a XML file. Example: [googlechrome](https://github.com/h404bi/dorado/blob/master/bucket/googlechrome.json)
 
@@ -480,7 +479,7 @@ Use XPath to retrieve the hash from a XML file. Example: [googlechrome](https://
 }
 ```
 
-## Getting hash from RDF file
+## 从 RDF 文件获取 hash
 
 [Resource Description Framework (RDF)](https://www.w3.org/TR/rdf11-concepts/) is a framework for representing information in the Web. Hash value could be extracted from RDF file. Example: [imagemagick](https://github.com/ScoopInstaller/Main/blob/master/bucket/imagemagick.json)
 
@@ -491,7 +490,7 @@ Use XPath to retrieve the hash from a XML file. Example: [googlechrome](https://
 }
 ```
 
-## Getting hash from from Metalink
+## 从 Metalink 获取 hash
 
 [Metalink](http://www.metalinker.org/) is an Internet standard that harnesses the speed and power of peer to peer networking and traditional downloads with a single click. For download URL that supported Metalink, hash value could be retrieved from download URL's header or a `.meta4` file. Example: [libreoffice-fresh](https://github.com/lukesampson/scoop-extras/blob/master/bucket/libreoffice-fresh.json)
 
@@ -501,89 +500,89 @@ Use XPath to retrieve the hash from a XML file. Example: [googlechrome](https://
 }
 ```
 
-## Properties of `autoupdate.hash`
+## `autoupdate.hash` 的属性
 
-All the properties can be set globally for all architectures or for each architecture separately
+可以为所有架构全局设置所有属性, 也可以为每个架构单独设置所有属性
 
 - `mode`: "string|enum".
-  - **`extract`**: Extract from a plain text file or webpage by RegEx (Default, can be omitted)
-  - `json`: Extract from a JSON file by JSONPath
-  - `xpath`: Extract from a XML file by XPath
-  - `rdf`: Extract from a RDF file
-  - `metalink`: Extract from Metalink's header or `.meta4` file
-  - `fosshub`: *Automatic*. Predefined for FossHub
-  - `sourceforge`: *Automatic*. Predefined for SourceForge
-  - `download`: Downloads the app file and hash it locally (Fallback)
-- `url`: "uri". URL template for downloading RDF/JSON files or extracting hashes
-  - Supports [captured variables](#captured-variables)
-  - Supports [version variables](#version-variables)
-  - Supports [URL variables](#url-variables)
+  - **`extract`**: 用正则表达式从纯文本文件或网页提取 (默认, 可省略)
+  - `json`: 用 JSONPath 从 JSON 文件提取
+  - `xpath`: 用 XPath 从 XML 文件提取
+  - `rdf`: 从 RDF 文件提取
+  - `metalink`: 从 Metalink 的 header/头 或 `.meta4` 文件提取
+  - `fosshub`: *自动*. 为 FossHub 预定义
+  - `sourceforge`: *自动*. 为 SourceForge 预定义
+  - `download`: 下载应用在本地计算 hash (备用)
+- `url`: "uri". URL 模板, 用于下载 RDF/JSON 文件或提取 hash
+  - 支持 [captured variables](#captured-variables)
+  - 支持 [version variables](#version-variables)
+  - 支持 [URL variables](#url-variables)
 - `regex|find`: "regex". RegEx expression to extract the hash
-  - Defaults: `^([a-fA-F0-9]+)$` and `([a-fA-F0-9]{32,128})[\x20\t]+.*$basename(?:[\x20\t]+\d+)?`
-  - Supports [captured variables](#captured-variables)
-  - Supports [version Variables](#version-variables)
-  - Supports [URL variables](#url-variables)
-  - Supports [hash variables](#hash-variables)
+  - 支持: `^([a-fA-F0-9]+)$` and `([a-fA-F0-9]{32,128})[\x20\t]+.*$basename(?:[\x20\t]+\d+)?`
+  - 支持 [captured variables](#captured-variables)
+  - 支持 [version Variables](#version-variables)
+  - 支持 [URL variables](#url-variables)
+  - 支持 [hash variables](#hash-variables)
 - `jsonpath|jp`: "jsonpath". JSONPath expression to extract the hash
-  - Supports [captured variables](#captured-variables)
-  - Supports [version Variables](#version-variables)
-  - Supports [URL variables](#url-variables)
+  - 支持 [captured variables](#captured-variables)
+  - 支持 [version Variables](#version-variables)
+  - 支持 [URL variables](#url-variables)
 - `xpath`: "string". XPath expression to extract the hash
-  - Supports [captured variables](#captured-variables)
-  - Supports [version Variables](#version-variables)
-  - Supports [URL variables](#url-variables)
-- *`type`: "string|enum". Deprecated, hash type is determined automatically*
+  - 支持 [captured variables](#captured-variables)
+  - 支持 [version Variables](#version-variables)
+  - 支持 [URL variables](#url-variables)
+- *`type`: "string|enum". 已废弃, hash 类型自动确定*
 
-# Internal substitutable variables
+# 内部可替换变量
 
-## Captured variables
+## 捕获变量
 
-- Used in `checkver.replace`
-  - `${1}`, `${2}`, `${3}`...: Unnamed groups
-  - `${name1}`, `${Name2}`, `${NAME3}`...: Named groups
+- 用于 `checkver.replace`
+  - `${1}`, `${2}`, `${3}`...: 未命名组
+  - `${name1}`, `${Name2}`, `${NAME3}`...: 命名组
     - `(?<name1>...)`, `(?<Name2>...)`, `(?<NAME3>...)`...
-- Used in `autoupdate`
-  - `$match1`, `$match2`, `$match3`...: Unnamed groups
-  - `$matchName1`, `$matchName2`, `$matchName3`...: Named groups
+- 用于 `autoupdate`
+  - `$match1`, `$match2`, `$match3`...: 未命名组
+  - `$matchName1`, `$matchName2`, `$matchName3`...: 命名组
     - `(?<name1>...)`, `(?<Name2>...)`, `(?<NAME3>...)`...
-    - *Notice the only uppercase character in variable name*
+    - *注意变量名中唯一的大写字符*
 
-## Version variables
+## Version 变量
 
 - `$version`: `3.7.1`
 - `$underscoreVersion`: `3_7_1`
 - `$dashVersion`: `3-7-1`
 - `$cleanVersion`: `371`
-- The `$version` (e.g. `3.7.1.2`) is splitted on each `.` and is assigned to:
+- `$version` (例如 `3.7.1.2`) 被每个 `.` 分割, 赋值给:
   - `$majorVersion`: `3`
   - `$minorVersion`: `7`
   - `$patchVersion`: `1`
   - `$buildVersion`: `2`
 - `$matchHead`: Returns first two or three digits seperated by a dot (e.g. `3.7.1-rc.1` = `3.7.1` , `3.7.1.2-rc.1` = `3.7.1` or `3.7-rc.1` = `3.7`)
-- `$matchTail`: Returns the rest of `$matchHead` (e.g. `3.7.1-rc.1` = `-rc.1` , `3.7.1.2-rc.1` = `.2-rc.1` or `3.7-rc.1` = `-rc.1`)
-- `$preReleaseVersion`: Everything after the last `-` (e.g. `3.7.1-rc.1` would result in `rc.1`)
+- `$matchTail`: Returns the rest of `$matchHead` (例如 `3.7.1-rc.1` = `-rc.1` , `3.7.1.2-rc.1` = `.2-rc.1` 或 `3.7-rc.1` = `-rc.1`)
+- `$preReleaseVersion`: 在最后 `-` 后的所有 (例如 `3.7.1-rc.1` 中的 `rc.1`)
 - Each capturing group in the [`checkver` property](#adding-checkver-to-a-manifest) adds a `$matchX` variable (named groups are allowed). Matching `v3.7.1/3.7` with [`v(?<version>[\d.]+)\/(?<short>[\d.]+)`](https://regex101.com/r/M7RP3p/1) would result in:
-  - `$match1` or `$matchVersion`: `3.7.1`
-  - `$match2` or `$matchShort`: `3.7`
+  - `$match1` 或 `$matchVersion`: `3.7.1`
+  - `$match2` 或 `$matchShort`: `3.7`
 
-## URL variables
+## URL 变量
 
-- `$url`: autoupdate URL without fragments (`#/dl.7z`) [e.g. `http://example.com/path/file.exe`]
-- `$baseurl`: autoupdate URL without filename and fragments (`#/dl.7z`) [e.g. `http://example.com/path`]
-- `$basename`: filename from autoupdate URL (ignores fragments `#/dl.7z`)
+- `$url`: 没有 fragments/片段(`#/dl.7z`)的 autoupdate URL/自动更新 URL [例子 `http://example.com/path/file.exe`]
+- `$baseurl`: 没有文件名和片段(`#/dl.7z`)的 autoupdate URL [e.g. `http://example.com/path`]
+- `$basename`: 来自 autoupdate URL 的文件名 (忽略片段 `#/dl.7z`)
 
-## Hash variables
+## Hash 变量
 
-- `$md5`: `([a-fA-F0-9]{32})` MD5 hash type
-- `$sha1`: `([a-fA-F0-9]{40})` SHA-1 hash type
-- `$sha256`: `([a-fA-F0-9]{64})` SHA-256 hash type
-- `$sha512`: `([a-fA-F0-9]{128})` SHA-512 hash type
-- `$checksum`: `([a-fA-F0-9]{32,128})` MD5, SHA-1, SHA-256 or SHA-512 hash type
-- `$base64`: `([a-zA-Z0-9+\/=]{24,88})` BASE64 encoded checksum (can be MD5, SHA-1, SHA-256 or SHA-512)
+- `$md5`: `([a-fA-F0-9]{32})` MD5 hash 类型
+- `$sha1`: `([a-fA-F0-9]{40})` SHA-1 hash 类型
+- `$sha256`: `([a-fA-F0-9]{64})` SHA-256 hash 类型
+- `$sha512`: `([a-fA-F0-9]{128})` SHA-512 hash 类型
+- `$checksum`: `([a-fA-F0-9]{32,128})` MD5, SHA-1, SHA-256 或 SHA-512 hash 类型
+- `$base64`: `([a-zA-Z0-9+\/=]{24,88})` BASE64 编码校验和 (可以是 MD5, SHA-1, SHA-256 或 SHA-512)
 
-# Testing and running autoupdate
+# 测试和运行 autoupdate
 
-If you want to confirm an autoupdate works, e.g. after adding it to an existing manifest or creating a new one, change the `version` field to a lower or different version and then run `checkver.ps1` or use the `-f` parameter.
+如果你想确认一个 autoupdate 是否工作, 例如将它添加到一个已存在的清单或创建新的, 更改 `version` 字段为更低或不同版本并运行 `checkver.ps1` 或使用 `-f` 参数.
 
 ```powershell
 cd <bucket repository>
@@ -595,34 +594,34 @@ Check if the `url`, `hash` and `extract_dir` properties have the correct values.
 
 Manifests in some known buckets are autoupdated by [ScoopInstaller/GithubActions](https://github.com/ScoopInstaller/GithubActions), so if you want some apps being autoupdated, migrate them to one of these buckets or run an instance of the excavator yourself.
 
-- [`main`](https://github.com/ScoopInstaller/Main): Update per hour
-- [`extras`](https://github.com/ScoopInstaller/Extras): Update per hour
-- [`versions`](https://github.com/ScoopInstaller/Versions): Update per day
-- [`java`](https://github.com/ScoopInstaller/Java): Update per day
-- [`php`](https://github.com/ScoopInstaller/PHP): Update per day
-- [`games`](https://github.com/Calinou/scoop-games): Update per day
+- [`main`](https://github.com/ScoopInstaller/Main): 每小时更新
+- [`extras`](https://github.com/ScoopInstaller/Extras): 每小时更新
+- [`versions`](https://github.com/ScoopInstaller/Versions): 每日更新
+- [`java`](https://github.com/ScoopInstaller/Java): 每日更新
+- [`php`](https://github.com/ScoopInstaller/PHP): 每日更新
+- [`games`](https://github.com/Calinou/scoop-games): 每日更新
 
-# Example Workflow with **scoop** status/update
+# **scoop** status/update 示例工作流程
 
-`scoop status` compares your installed version against the current copy of **scoop** and bucket repositories on your machine. If these are not updated it will output wrong version information. e.g.:
+`scoop status` 将你已安装版本与你机器上当前 **scoop** 拷贝和 bucket 存储库比较. 如果这些没有更新, 它会输出错误版本信息. 例如:
 
-- installed version: 2.1.2
-- local **scoop** version: 2.1.3
-- online repo version: 2.1.4
+- 已安装版本: 2.1.2
+- 本地 **scoop** 版本: 2.1.3
+- 线上存储库版本: 2.1.4
 
-`scoop status` will show version 2.1.3
+`scoop status` 会显示版本 2.1.3
 
-Running `scoop update` before `scoop status` is recommended (which is enforced every 3 hours), then it will show currect version 2.1.4.
+推荐在 `scoop status` 前运行 `scoop update` (每 3 小时执行一次), 它会显示当前版本 2.1.4.
 
-`scoop update` just `git pull`s **scoop** core repo to `~\scoop\apps\scoop\current` and every configured bucket to `~\scoop\buckets\<name>` (incl. default main bucket)
+`scoop update` 只是 `git pull`s **scoop** core repo 到 `~\scoop\apps\scoop\current` 并将每个配置的 bucket 到 `~\scoop\buckets\<name>` (总之 默认 main bucket)
 
-`bin\checkver.ps1` is only for maintenance and updating the manifests so they can be committed to the repo.
+`bin\checkver.ps1` 仅用于维护和更新清单, 以便它们可以提交到 repo.
 
-Example Workflow:
+示例工作流程:
 
 ```powershell
 cd <bucket repository>
-.\bin\checkver * -u # updates all manifest in the repo
+.\bin\checkver * -u # updates all manifest in the repo/更新存储库中所有清单
 git commit -m "Updated apps"
 git push
 scoop update
