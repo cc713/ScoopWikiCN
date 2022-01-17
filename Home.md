@@ -1,50 +1,50 @@
-# Documentation
+# 文档
 
-## Overview
+## 概述
 
-* [So What?](wiki/So-What.md)
-* [How is Scoop different from Chocolatey?](wiki/Chocolatey-Comparison.md)
-* [How is Scoop different from Cygwin and MSYS?](wiki/Cygwin-and-MSYS-Comparison.md)
+* [为什么用 Scoop?](wiki/So-What.md)
+* [Scoop 与 Chocolatey 有什么不同?](wiki/Chocolatey-Comparison.md)
+* [Scoop 与 Cygwin 和 MSYS 有什么不同?](wiki/Cygwin-and-MSYS-Comparison.md)
 
-## Getting Started
+## 开始
 
-* [Quick Start](wiki/Quick-Start.md)
-* [Command Help](wiki/Commands.md)
+* [快速开始](wiki/Quick-Start.md)
+* [命令帮助](wiki/Commands.md)
 * [FAQ](wiki/FAQ.md)
-* [Uninstalling Scoop](wiki/Uninstalling-Scoop.md)
+* [卸载 Scoop](wiki/Uninstalling-Scoop.md)
 
-## Concepts
+## 内容
 
-* [Apps](wiki/Apps.md)
-* [Buckets](wiki/Buckets.md)
-* [App Manifests](wiki/App-Manifests.md)
-  * [Creating an App Manifest](wiki/Creating-an-app-manifest.md)
-  * [Autoupdate](wiki/App-Manifest-Autoupdate.md)
-  * [Persistent data](wiki/Persistent-data.md)
-  * [Pre- and post-install Scripts](Pre--and-Post-install-scripts.md)
-* [Dependencies](wiki/Dependencies.md)
-* [Making a contribution](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md)
-* [The 'Current' Version Alias](wiki/The-'Current'-Version-Alias.md)
+* [Apps/应用](wiki/Apps.md)
+* [Buckets/桶](wiki/Buckets.md)
+* [App Manifests/应用清单](wiki/App-Manifests.md)
+  * [创建应用清单](wiki/Creating-an-app-manifest.md)
+  * [Autoupdate/自动更新](wiki/App-Manifest-Autoupdate.md)
+  * [Persistent data/保留数据](wiki/Persistent-data.md)
+  * [安装前和安装后脚本](Pre--and-Post-install-scripts.md)
+* [Dependencies/依赖](wiki/Dependencies.md)
+* [作出贡献](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md)
+* ['Current'/当前版本别名](wiki/The-'Current'-Version-Alias.md)
 
-## Guides
+## 指南
 
-* [Apache with PHP](wiki/Apache-with-PHP.md)
-* [Customize PHP configuration](wiki/Custom-PHP-configuration.md)
+* [带 PHP 的 Apache](wiki/Apache-with-PHP.md)
+* [自定义 PHP 配置](wiki/Custom-PHP-configuration.md)
 * [Docker](wiki/Docker.md)
-* [GitHub with SSH Key](wiki/GitHub-with-SSH-Key.md)
+* [GitHub 带 SSH 密钥](wiki/GitHub-with-SSH-Key.md)
 * [Java](wiki/Java.md)
 * [SSH](wiki/SSH-on-Windows.md)
-* [Theming Powershell](wiki/Theming-Powershell.md)
+* [主题化 Powershell](wiki/Theming-Powershell.md)
 
-## Misc
+## 杂项
 
-* [Antivirus false positive](Antivirus-false-positive.md)
-* [Can I use Scoop in Bash, Zsh, etc?](wiki/Can-I-Use-Scoop-in-Bash,-Zsh,-etc.md)
-* [Example Setup Scripts](wiki/Example-Setup-Scripts.md)
-* [Folder layout](wiki/Scoop-Folder-Layout.md)
-* [Open With and Icons](wiki/Open-With-Icons.md)
-* [PowerShell modules](wiki/PowerShell-Modules.md)
-* [Switching Ruby, Python and PHP Versions](wiki/Switching-Ruby,-Python-and-PHP-Versions.md)
-* [System-wide (global) installs](wiki/Global-Installs.md)
-* [Using Scoop behind a proxy server](wiki/Using-Scoop-behind-a-proxy.md)
-* [Why PowerShell?](wiki/Why-PowerShell.md)
+* [防病毒误报](Antivirus-false-positive.md)
+* [我可以在 Bash,Zsh 和其他中用 Scoop 吗?](wiki/Can-I-Use-Scoop-in-Bash,-Zsh,-etc.md)
+* [实例安装脚本](wiki/Example-Setup-Scripts.md)
+* [文件夹布局](wiki/Scoop-Folder-Layout.md)
+* [打开方式和图标](wiki/Open-With-Icons.md)
+* [PowerShell modules(模块)](wiki/PowerShell-Modules.md)
+* [切换 Ruby, Python 和 PHP 版本](wiki/Switching-Ruby,-Python-and-PHP-Versions.md)
+* [系统范围 (global/全局)安装](wiki/Global-Installs.md)
+* [在代理服务器后使用 Scoop](wiki/Using-Scoop-behind-a-proxy.md)
+* [为什么是 PowerShell?](wiki/Why-PowerShell.md)
