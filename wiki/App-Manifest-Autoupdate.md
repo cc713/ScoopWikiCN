@@ -171,18 +171,18 @@ scoop install bucket\<app>.json
 
 ## `checkver` 的属性
 
-- `checkver`: "regex". RegEx for finding the version on the `homepage`
-  - `github`: "uri". URL to the app's Github repository
-  - `url`: "uri". Page where the version can be found
-    - Supports [version variables](#version-variables)
-  - `regex|re`: "regex". RegEx for finding the version
-  - `jsonpath|jp`: "jsonpath". JSONPath expression for finding the version
-  - `xpath`: "string". XPath expression for finding the version
-  - `reverse`: "boolean". If or not match the last occurrence found
-  - `replace`: "string". Replace the matched value with a calculated value
-    - Supports [captured variables](#captured-variables)
-  - `useragent`: "string". User-Agent that used to get webpage content (only used in [fiddler](https://github.com/lukesampson/scoop-extras/blob/master/bucket/fiddler.json))
-    - Supports [version variables](#version-variables)
+- `checkver`: "regex". 正则表达式用于在 `homepage` 查找 version/版本
+  - `github`: "uri". 指向 app Github repository/存储库的 URL
+  - `url`: "uri". 可以找到 version/版本的页面
+    - 支持 [version/版本 变量](#version-variables)
+  - `regex|re`: "regex". 用于查找版本的正则表达式
+  - `jsonpath|jp`: "jsonpath". 用于查找版本的 JSONPath 表达式
+  - `xpath`: "string". 用于查找版本的 XPath 表达式
+  - `reverse`: "boolean". 是否匹配最后一次出现
+  - `replace`: "string". 替换匹配值为计算值
+    - 支持 [捕获变量](#captured-variables)
+  - `useragent`: "string". 用于获取网页内容的 User-Agent/用户代理 (仅用于 [fiddler](https://github.com/lukesampson/scoop-extras/blob/master/bucket/fiddler.json))
+    - 支持 [版本变量](#版本变量)
 
 # 添加 `autoupdate` 到清单
 
@@ -270,7 +270,7 @@ scoop install bucket\<app>.json
 }
 ```
 
-Some examples using the `autoupdate` feature with [captured variables](#captured-variables) or [version variables](#version-variables):
+一些例子将 `autoupdate` 功能与 [捕获变量](#捕获变量) 或 [版本变量](#版本变量):
 
 - [openjdk](https://github.com/ScoopInstaller/Java/blob/master/bucket/openjdk.json)
 
@@ -311,29 +311,31 @@ Some examples using the `autoupdate` feature with [captured variables](#captured
 
 ## `autoupdate` 的属性
 
-Most of the [manifest properties](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests) could be added into `autoupdate`: `bin`, `extract_dir`, `extract_to`, `env_add_path`, `env_set`, `installer`, `license`, `note`, `persist`, `post_install`, `psmodule`, `shortcuts`, and the most important ones, `url` and `hash`.
+大多数 [清单属性](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests) 可添加到 `autoupdate`: `bin`, `extract_dir`, `extract_to`, `env_add_path`, `env_set`, `installer`, `license`, `note`, `persist`, `post_install`, `psmodule`, `shortcuts`, and the most important ones, `url` 和 `hash`.
 
-All the properties except `autoupdate.note` can be set globally for all architectures or for each architecture separately (under `architecture.64bit` or `architecture.32bit`). Global properties can be used to update each architectural properties, i.e., if only setted globally, `autoupdate.url` is used to update either `architecture.64bit.url` or `architecture.32bit.url`.
+除 `autoupdate.note` 之外的所有属性都可以为所有架构全局设置, 也可以为每个架构单独设置(在 `architecture.64bit` 或 `architecture.32bit` 下). 全局属性可用于更新每个架构属性, 即如果仅全局设置, 则 `autoupdate.url` 用于更新 `architecture.64bit.url` 或 `architecture.32bit.url`.
 
 All the properties except `hash` support [captured variables](#captured-variables) and [version variables](#version-variables), and `hash` has its own [property](#adding-hash-to-autoupdate) for obtaining hash values without download the actual files.
 
+除了 `hash` 之外的所有属性都支持 [捕获变量](#捕获变量) 和 [版本变量](#version-variables), 并且 `hash` 有自己的 [属性](#添加-hash-到-autoupdate)用于在不下载实际文件的情况下获取哈希值.
+
 # 添加 `hash` 到 `autoupdate`
 
-There are several ways to obtain the hash of the new file. If the app provider publishes hash values it is possible to extract these from their website or hashfile. If nothing is defined or something goes wrong while getting the hash values the target files will be downloaded and hashed locally.
+有几种方法可以获取新文件的 hash. 如果应用提供者发布 hash, 则可以从他们的网站或 hash 文件中提取这些值. 如果在获取 hash 时未定义任何内容或出现问题, 则目标文件将被下载并在本地进行 hash 处理.
 
-Hash value can be directly extracted by the following method (`autoupdate.hash.mode`):
+可以通过以下方法直接提取 hash (`autoupdate.hash.mode`):
 
-- Using RegEx for plain text file or webpage (`extract`, *predefined `fosshub`, `sourceforge`*)
-- Using JSONPath for JSON file (`json`)
-- Using XPath for XML file (`xpath`)
-- Using Digest for RDF file (`rdf`)
-- Using download header or `.meta4` for [Metalink](http://www.metalinker.org) (`metalink`)
+- 为纯文本文件或网页使用正则表达式 (`extract`, *预定义 `fosshub`, `sourceforge`*)
+- 为 JSON 文件使用 JSONPath (`json`)
+- 为 XML 文件使用 XPath (`xpath`)
+- 为 RDF 文件使用摘要 (`rdf`)
+- 下载 header/头 或 `.meta4` 为 [Metalink](http://www.metalinker.org) (`metalink`)
 
 ## 在 `hash.url` 中指定 url
 
-`url` in `hash` property accepts URL with [captured variables](#captured-variables), [version variables](#version-variables) or [URL variables](#url-variables).
+`hash` 属性中的 `url` 接受带 [捕获变量](#捕获变量), [版本变量](#版本变量) 或 [URL 变量](#url-变量)的 URL.
 
-- Use [captured variables](#captured-variables). Example: [qemu](https://github.com/ScoopInstaller/Main/blob/master/bucket/qemu.json)
+- 使用 [捕获变量](#捕获变量). 例子: [qemu](https://github.com/ScoopInstaller/Main/blob/master/bucket/qemu.json)
 
 ```json
 "checkver": {
@@ -357,7 +359,7 @@ Hash value can be directly extracted by the following method (`autoupdate.hash.m
 }
 ```
 
-- Use [version variables](#version-variables). Example: [julia](https://github.com/ScoopInstaller/Main/blob/master/bucket/julia.json)
+- 使用 [版本变量](#version-variables). 例子: [julia](https://github.com/ScoopInstaller/Main/blob/master/bucket/julia.json)
 
 ```json
 "hash": {
@@ -365,7 +367,7 @@ Hash value can be directly extracted by the following method (`autoupdate.hash.m
 }
 ```
 
-- Use [URL variables](#url-variables) and append suffix to it. Example: [apache](https://github.com/ScoopInstaller/Main/blob/master/bucket/apache.json)
+- 使用 [URL 变量](#url-变量) 并添加后缀. 例子: [apache](https://github.com/ScoopInstaller/Main/blob/master/bucket/apache.json)
 
 ```json
 "hash": {
@@ -448,7 +450,7 @@ abcdef0123456789abcdef0123456789abcdef01 *example.zip
 
 ## 从 JSON 文件获取 hash
 
-For JSON file, use a JSON endpoint with [JSONPath expressions](https://goessner.net/articles/JsonPath/) to retrieve the hash. Either dot-notation or bracket-notation can be used. Example: [openssl](https://github.com/ScoopInstaller/Main/blob/master/bucket/openssl.json)
+对于 JSON 文件, 使用带 [JSONPath 表达式](https://goessner.net/articles/JsonPath/)的 Json 端点获取 hash. 点标记或括号标记都可使用. 例子: [openssl](https://github.com/ScoopInstaller/Main/blob/master/bucket/openssl.json)
 
 ```json
 "hash": {
@@ -458,7 +460,7 @@ For JSON file, use a JSON endpoint with [JSONPath expressions](https://goessner.
 }
 ```
 
-There could be a JSONPath query in `autoupdate.hash.jsonpath`, and so does RegEx ([sample reference](https://www.newtonsoft.com/json/help/html/RegexQuery.htm)). Example: [mro](https://github.com/ScoopInstaller/Main/blob/master/bucket/mro.json)
+在 `autoupdate.hash.jsonpath` 中可以有 JSONPath 查询和正则表达式 ([样本参考](https://www.newtonsoft.com/json/help/html/RegexQuery.htm)). 例子: [mro](https://github.com/ScoopInstaller/Main/blob/master/bucket/mro.json)
 
 ```json
 "hash": {
@@ -470,7 +472,7 @@ There could be a JSONPath query in `autoupdate.hash.jsonpath`, and so does RegEx
 
 ## 从 XML 文件获取 hash
 
-Use XPath to retrieve the hash from a XML file. Example: [googlechrome](https://github.com/h404bi/dorado/blob/master/bucket/googlechrome.json)
+用 XPath 从 XML 文件提取 hash. 例子: [googlechrome](https://github.com/h404bi/dorado/blob/master/bucket/googlechrome.json)
 
 ```json
 "hash": {
@@ -481,7 +483,7 @@ Use XPath to retrieve the hash from a XML file. Example: [googlechrome](https://
 
 ## 从 RDF 文件获取 hash
 
-[Resource Description Framework (RDF)](https://www.w3.org/TR/rdf11-concepts/) is a framework for representing information in the Web. Hash value could be extracted from RDF file. Example: [imagemagick](https://github.com/ScoopInstaller/Main/blob/master/bucket/imagemagick.json)
+[Resource Description Framework (RDF)/资源描述框架](https://www.w3.org/TR/rdf11-concepts/) 是在 Web 中表示信息的框架. Hash 值可以从 RDF 文件中提取. 例子: [imagemagick](https://github.com/ScoopInstaller/Main/blob/master/bucket/imagemagick.json)
 
 ```json
 "hash": {
@@ -492,7 +494,7 @@ Use XPath to retrieve the hash from a XML file. Example: [googlechrome](https://
 
 ## 从 Metalink 获取 hash
 
-[Metalink](http://www.metalinker.org/) is an Internet standard that harnesses the speed and power of peer to peer networking and traditional downloads with a single click. For download URL that supported Metalink, hash value could be retrieved from download URL's header or a `.meta4` file. Example: [libreoffice-fresh](https://github.com/lukesampson/scoop-extras/blob/master/bucket/libreoffice-fresh.json)
+[Metalink](http://www.metalinker.org/) is an Internet standard that harnesses the speed and power of peer to peer networking and traditional downloads with a single click. For download URL that supported Metalink, hash value could be retrieved from download URL's header or a `.meta4` file. 例子: [libreoffice-fresh](https://github.com/lukesampson/scoop-extras/blob/master/bucket/libreoffice-fresh.json)
 
 ```json
 "hash": {
@@ -547,7 +549,7 @@ Use XPath to retrieve the hash from a XML file. Example: [googlechrome](https://
     - `(?<name1>...)`, `(?<Name2>...)`, `(?<NAME3>...)`...
     - *注意变量名中唯一的大写字符*
 
-## Version 变量
+## 版本变量
 
 - `$version`: `3.7.1`
 - `$underscoreVersion`: `3_7_1`
