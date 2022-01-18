@@ -494,7 +494,7 @@ abcdef0123456789abcdef0123456789abcdef01 *example.zip
 
 ## 从 Metalink 获取 hash
 
-[Metalink](http://www.metalinker.org/) is an Internet standard that harnesses the speed and power of peer to peer networking and traditional downloads with a single click. For download URL that supported Metalink, hash value could be retrieved from download URL's header or a `.meta4` file. 例子: [libreoffice-fresh](https://github.com/lukesampson/scoop-extras/blob/master/bucket/libreoffice-fresh.json)
+[Metalink](http://www.metalinker.org/) 是一种互联网标准, 它利用对等网络的速度和功能以及单击一次即可进行的传统下载. 对于支持 Metalink 的下载 URL, 可以从下载 URL 的 header/头或 `.meta4` 文件中检索 hash 值. 例子: [libreoffice-fresh](https://github.com/lukesampson/scoop-extras/blob/master/bucket/libreoffice-fresh.json)
 
 ```json
 "hash": {
@@ -516,23 +516,23 @@ abcdef0123456789abcdef0123456789abcdef01 *example.zip
   - `sourceforge`: *自动*. 为 SourceForge 预定义
   - `download`: 下载应用在本地计算 hash (备用)
 - `url`: "uri". URL 模板, 用于下载 RDF/JSON 文件或提取 hash
-  - 支持 [captured variables](#captured-variables)
-  - 支持 [version variables](#version-variables)
-  - 支持 [URL variables](#url-variables)
-- `regex|find`: "regex". RegEx expression to extract the hash
-  - 支持: `^([a-fA-F0-9]+)$` and `([a-fA-F0-9]{32,128})[\x20\t]+.*$basename(?:[\x20\t]+\d+)?`
-  - 支持 [captured variables](#captured-variables)
-  - 支持 [version Variables](#version-variables)
-  - 支持 [URL variables](#url-variables)
-  - 支持 [hash variables](#hash-variables)
-- `jsonpath|jp`: "jsonpath". JSONPath expression to extract the hash
-  - 支持 [captured variables](#captured-variables)
-  - 支持 [version Variables](#version-variables)
-  - 支持 [URL variables](#url-variables)
-- `xpath`: "string". XPath expression to extract the hash
-  - 支持 [captured variables](#captured-variables)
-  - 支持 [version Variables](#version-variables)
-  - 支持 [URL variables](#url-variables)
+  - 支持 [捕获变量](#captured-variables)
+  - 支持 [版本变量](#版本变量)
+  - 支持 [UURL 变量](#url-变量)
+- `regex|find`: "regex". 用于提取 hash 的正则表达式
+  - 支持: `^([a-fA-F0-9]+)$` 和 `([a-fA-F0-9]{32,128})[\x20\t]+.*$basename(?:[\x20\t]+\d+)?`
+  - 支持 [捕获变量](#捕获变量)
+  - 支持 [版本变量](#版本变量)
+  - 支持 [URL 变量](#url-变量)
+  - 支持 [hash 变量](#hash-变量)
+- `jsonpath|jp`: "jsonpath". 用于提取 hash 的 JSONPath 表达式
+  - 支持 [捕获变量](#捕获变量)
+  - 支持 [版本变量](#版本变量)
+  - 支持 [URL 变量](#url-变量)
+- `xpath`: "string". 用于提取 hash 的 XPath 表达式
+  - 支持 [捕获变量](#捕获变量)
+  - 支持 [版本变量](#版本变量)
+  - 支持 [URL 变量](#url-变量)
 - *`type`: "string|enum". 已废弃, hash 类型自动确定*
 
 # 内部可替换变量
@@ -560,10 +560,10 @@ abcdef0123456789abcdef0123456789abcdef01 *example.zip
   - `$minorVersion`: `7`
   - `$patchVersion`: `1`
   - `$buildVersion`: `2`
-- `$matchHead`: Returns first two or three digits seperated by a dot (e.g. `3.7.1-rc.1` = `3.7.1` , `3.7.1.2-rc.1` = `3.7.1` or `3.7-rc.1` = `3.7`)
-- `$matchTail`: Returns the rest of `$matchHead` (例如 `3.7.1-rc.1` = `-rc.1` , `3.7.1.2-rc.1` = `.2-rc.1` 或 `3.7-rc.1` = `-rc.1`)
+- `$matchHead`: 返回由点分隔的前两位或三位数字 (例如 `3.7.1-rc.1` = `3.7.1` , `3.7.1.2-rc.1` = `3.7.1` or `3.7-rc.1` = `3.7`)
+- `$matchTail`: 返回 `$matchHead` 后剩余部分 (例如 `3.7.1-rc.1` = `-rc.1` , `3.7.1.2-rc.1` = `.2-rc.1` 或 `3.7-rc.1` = `-rc.1`)
 - `$preReleaseVersion`: 在最后 `-` 后的所有 (例如 `3.7.1-rc.1` 中的 `rc.1`)
-- Each capturing group in the [`checkver` property](#adding-checkver-to-a-manifest) adds a `$matchX` variable (named groups are allowed). Matching `v3.7.1/3.7` with [`v(?<version>[\d.]+)\/(?<short>[\d.]+)`](https://regex101.com/r/M7RP3p/1) would result in:
+- [`checkver` 属性](#添加-checkver-到清单) 的每个捕获组添加一个 `$matchX` 变量 (允许命名组). 匹配 `v3.7.1/3.7` 和 [`v(?<version>[\d.]+)\/(?<short>[\d.]+)`](https://regex101.com/r/M7RP3p/1) 会得到:
   - `$match1` 或 `$matchVersion`: `3.7.1`
   - `$match2` 或 `$matchShort`: `3.7`
 
@@ -592,9 +592,9 @@ scoop config debug $true
 .\bin\checkver.ps1 <app> -u
 ```
 
-Check if the `url`, `hash` and `extract_dir` properties have the correct values. Try to install/uninstall the app and submit your changes.
+检查 `url`, `hash` 和 `extract_dir` 属性是否有正确值. 尝试安装/卸载 app 并提交你的更改.
 
-Manifests in some known buckets are autoupdated by [ScoopInstaller/GithubActions](https://github.com/ScoopInstaller/GithubActions), so if you want some apps being autoupdated, migrate them to one of these buckets or run an instance of the excavator yourself.
+一些已知 bucket 中的清单由 [ScoopInstaller/GithubActions](https://github.com/ScoopInstaller/GithubActions)自动更新, 如果你希望一些 app 自动更新, 将它们迁移到其中一个 bucket 或自己运行 excavator 实例.
 
 - [`main`](https://github.com/ScoopInstaller/Main): 每小时更新
 - [`extras`](https://github.com/ScoopInstaller/Extras): 每小时更新
