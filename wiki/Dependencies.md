@@ -1,17 +1,19 @@
-Scoop treats dependencies in a way you might not expect, especially if you're used to tools like NuGet or Bundler. These tools have to deal with complex problems around long chains of dependencies for specific versions of libraries. Scoop takes a simpler approach.
+[toc]
 
-#### Apps are self-contained units
-They should keep their own copies of any libraries they need to run, and not rely on or interfere with any libraries outside their own install path.
+Scoop 以你可能意想不到的方式处理依赖项, 尤其是在你习惯使用 NuGet 或 Bundler 等工具的情况下. 这些工具必须处理围绕特定版本库的长依赖链的复杂问题. Scoop 采用更简单的方法.
 
-#### It's ok to just install the latest version
-If you were to install Git manually on a new machine, would you go looking for the specific version you had on your last machine to make sure everything works correctly? Or would you just grab the latest version from their website? Scoop assumes you probably want to do the latter.
+#### App 是自包含的单元
+它们应该保留自己需要运行的任何库的副本, 并且不依赖或干扰他们自己的安装路径之外的任何库.
 
-If this makes you uncomfortable, remember that unlike software libraries which can have breaking changes between minor version increments, this is less common with programs.
+#### 可以只安装最新版本
+如果你要在一台新机器上手动安装 Git, 你会去寻找你上一台机器上的特定版本以确保一切正常吗? 或者你会从他们的网站上获取最新版本吗? Scoop 假设你可能想做后者.
 
-Of course there are some cases where an old version of a program is still widely used and the new one isn't backwards compatible, like Python versions 2 and 3. Scoop has these cases covered too: you can install the latest 2.7 version with `python27` and for the latest 3.x version it's just `python`.
+如果这让你感到不舒服, 请记住, 与在次要版本增量之间可能会发生重大更改的软件库不同, 这在程序中不太常见.
 
-### Apps Depending on Other Apps
-Sometimes an app needs another app to install or run properly. For example:
+当然, 在某些情况下, 旧版本的程序仍然被广泛使用, 而新版本不向后兼容, 例如 Python 版本 2 和 3. Scoop 也涵盖了这些情况: 你可以使用 `python27` 安装最新的 2.7 版本, 对于最新的 3.x 版本, 它只是`python`.
+
+### 依赖其它 App 的 App
+有时一个 app 需要另一个 app 才能正常安装或运行. 例如:
 
 ```text
 rust
@@ -25,14 +27,14 @@ rust
       |—— 7zip required (to install)
 ```
 
-In these sort of cases, when you install an app Scoop will assume you want to install anything required that you don't already have and install these automatically too.
+在这种情况下, 当你安装应用程序时, Scoop 会假定您想要安装还没有的任何所需的东西, 并自动安装它们.
 
-##### Install-time Dependencies vs Runtime Dependencies
-Runtime dependencies are specified with the `depends` setting in the [app manifest](https://github.com/lukesampson/scoop/wiki/App-Manifests). Install-time dependencies are detected based on the file extensions of the `url`s in the app manifest.
+##### 安装时依赖 vs 运行时依赖
+运行时的依赖性是通过 [应用清单](https://github.com/lukesampson/scoop/wiki/App-Manifests) 中的 `depends` 设置指定的. 安装时的依赖是根据应用清单中的 "url" 文件扩展名来检测的.
 
-Scoop treats these differently, e.g. `scoop status` only shows warnings for missing **runtime** dependencies.
+Scoop 对这些的处理是不同的, 例如 `scoop status` 只显示缺少 **运行时** 依赖的警告.
 
-### Version dependencies
-For **software library dependencies**, Scoop just side-steps the problem of version dependencies completely, as described above.
+### 版本依赖
+对于 **软件库依赖**, Scoop 如上所述, 完全回避了版本依赖性的问题。
 
-For **app dependencies** when installing apps, Scoop assumes you want the latest stable version of any dependencies. *Again note that Scoop supports specific versions of apps too, e.g. an app could have a dependency on `python27` (Python v2.7), or `python` (the latest stable version of Python).* For updating apps, Scoop just does the bare minimum—if a dependency is completely missing it will install it, but if it's on an older version Scoop will leave it alone.
+对于安装 app 时的 **app 依赖项**, Scoop 假设你想要依赖项的最新版本. *再次注意 Scoop 也支持特定版本的 app, 例如 app 可能有依赖项 `python27` (Python v2.7), 或 `python` (Python 最新稳定版).* 对于更新 app, Scoop 只做最少—如果一个依赖完全缺失它会安装, 但如果有旧版本, Scoop 会让它保持原样.
