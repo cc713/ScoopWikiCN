@@ -1,6 +1,5 @@
-Scoop uses the term 'app' to refer to an application or program to be installed. You might also see it used to loosely refer to a [manifest](App-Manifests) that describes how to install an app.
+Scoop 使用术语 'app' 来指代要安装的应用程序或程序. 你可能还会看到它被松散地用于描述如何安装应用程序的 [manifest](App-Manifests).
 
-An app is a self-contained, independent unit. It contains one or more executables or scripts. But that's probably too much of an explanation—generally you'll know an app when you see it.
+App 是一个自包含, 独立的单元. 它包含一个或多个可执行文件或脚本. 但这可能解释得太多 -- 通常, 当你看到一个应用程序时, 你就会知道它.
 
-Probably the main reason for the term 'app' is that it only takes 3 keystrokes on 2 keys to type.
-
+使用 '应用程序' 一词的主要原因可能是只需在 2 个键上敲击 3 次即可键入.
