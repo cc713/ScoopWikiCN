@@ -615,7 +615,7 @@ scoop config debug $true
 
 推荐在 `scoop status` 前运行 `scoop update` (每 3 小时执行一次), 它会显示当前版本 2.1.4.
 
-`scoop update` 只是 `git pull`s **scoop** core repo 到 `~\scoop\apps\scoop\current` 并将每个配置的 bucket 到 `~\scoop\buckets\<name>` (总之 默认 main bucket)
+`scoop update` 只是 `git pull` **scoop** core repo/核心存储库 到 `~\scoop\apps\scoop\current` 并将每个配置的 bucket 到 `~\scoop\buckets\<name>` (总之 默认 main bucket)
 
 `bin\checkver.ps1` 仅用于维护和更新清单, 以便它们可以提交到 repo.
 

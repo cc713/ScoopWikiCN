@@ -1,6 +1,6 @@
-An app manifest is a JSON file that describes how to install a program.
+一个 app manifest/应用清单是一个描述如何安装程序的 JSON 文件.
 
-<a name="example"/>**A simple example**:
+**一个简单的例子**:
 
 ```json
 {
@@ -11,76 +11,78 @@ An app manifest is a JSON file that describes how to install a program.
 }
 ```
 
-When this manifest is run with `scoop install` it will download the zip file specified by `url`, extract the "cowsay-psh-master" directory from the zip file, and then make the `cowsay.ps1` script available on your path.
+当这个清单用 `scoop install` 运行时, 它会下载 `url` 指定的 zip 文件, 提取 "cowsay-psh-master" 目录, 并让 `cowsay.ps1` 脚本在你的路径中可用.
 
-For more examples, see the app manifests in the [main Scoop bucket](https://github.com/ScoopInstaller/Main/tree/master/bucket).
+更多例子, 见 [main Scoop bucket](https://github.com/ScoopInstaller/Main/tree/master/bucket) 中的应用清单.
 
-### Required Properties
+### 必需属性
 
-- <a name="version"/>`version`: The version of the app that this manifest installs.
-- <a name="description"/>`description`: A one line string containing a short description of the program. Don’t include the name of the program, if it’s the same as the app’s filename.
-- <a name="homepage"/>`homepage`: The home page for the program.
-- <a name="license"/>`license`: A string or hash of the software license for the program. For well-known licenses, please use the identifier found at <https://spdx.org/licenses> For other licenses, use the URL of the license, if available. Otherwise, use “Freeware”, “Proprietary”, “Public Domain”, “Shareware”, or “Unknown”, as appropriate. If different files have different licenses, separate licenses with a comma (,). If the entire application is [dual licensed](https://en.wikipedia.org/wiki/Multi-licensing), separate licenses with a pipe symbol (|).
-  - `identifier`: The SPDX identifier, or “Freeware”, “Proprietary”, “Public Domain”, “Shareware”, or “Unknown”, as appropriate.
-  - `url`: For non-SPDX licenses, include a link to the license. It is acceptable to include links to SPDX licenses, as well.
-  - If it is difficult to determine all of the different licenses, it is acceptable to add `,...` at the end of the SPDX list. If there are both open-source and not open-source licenses, please list all non-open source licenses first (e.g., Freeware/Proprietary/Shareware).
-  - If you are unable to determine what license the application has, use "Unknown".
+- `version`: 清单安装的应用版本.
+- `description`: 包含程序简短描述的单行字符串. 不要包含程序的名称, 如果它与应用程序的文件名相同.
+- `homepage`: 程序的主页.
+- `license`: 程序软件许可证的字符串或哈希. 对于知名许可证, 请使用 <https://spdx.org/licenses> 中的标识符. 对于其他许可证, 请使用许可证的 URL(如果有). 否则, 请酌情使用 "Freeware"("免费软件"), "Proprietary"("专有软件"), "Plublic Domain"("公共领域"), "Shareware"("共享软件") 或 "Unknown"("未知"). 如果不同文件有不同的许可证, 请使用逗号 (,) 分隔许可证. 如果整个应用程序是 [dual licensed](https://en.wikipedia.org/wiki/Multi-licensing)/双重许可, 请使用竖线符号 (|) 分隔许可.
 
-### Optional Properties
+  - `identifier`: SPDX 标识符, 或 "Freeware"("免费软件"), "Proprietary"("专有软件"), "Plublic Domain"("公共领域"), "Shareware"("共享软件") 或 "Unknown"("未知"), 视情况而定.
+  - `url`: 对于非 SPDX 许可证, 请包含指向该许可证的链接. 也可以包含指向 SPDX 许可证的链接.
+  - 如果难以确定所有不同的许可证, 可以在 SPDX 列表的末尾添加 `,...`. 如果同时存在开源和非开源许可证, 请首先列出所有非开源许可证(例如, Freeware/Proprietary/Shareware).
+  - 如果你无法确定应用程序拥有什么许可证, 请使用 "Unknown".
 
-- <a name="comment"/>`##`: A one-line string, or array of strings, containing comments.
-- <a name="architecture"/>`architecture`: If the app has 32- and 64-bit versions, architecture can be used to wrap the differences ([example](https://github.com/ScoopInstaller/Main/blob/master/bucket/7zip.json)).
-  - `32bit|64bit`: contains architecture-specific instructions (`bin`, `checkver`, `extract_dir`, `hash`, `installer`,  `pre_install`, `post_install`, `shortcuts`, `uninstaller`, `url`, and `msi` [`msi` is deprecated]).
-- <a name="autoupdate"/>[`autoupdate`](App-Manifest-Autoupdate#adding-autoupdate-to-a-manifest): Definition of how the manifest can be updated automatically.
-- <a name="bin"/>`bin`: A string or array of strings of programs (executables or scripts) to make available on the user's path.
-  - You can also create an alias shim which uses a different name to the real executable and (optionally) passes arguments to the executable. Instead of just using a string for the executable, use e.g: `[ "program.exe", "alias", "--arguments" ]`. See [busybox](https://github.com/ScoopInstaller/Main/blob/master/bucket/busybox.json) for an example.
-  - However if you declare just one shim like this, you must ensure it's enclosed in an outer array, e.g:
-      `"bin": [ [ "program.exe", "alias" ] ]`. Otherwise it will be read as separate shims.
-- <a name="checkver"/>[`checkver`](App-Manifest-Autoupdate#adding-checkver-to-a-manifest): App maintainers and developers can use the [bin/checkver](https://github.com/lukesampson/scoop/blob/master/bin/checkver.ps1) tool to check for updated versions of apps. The `checkver` property in a manifest is a regular expression that can be used to match the current stable version of an app from the app's homepage. For an example, see the [go](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json) manifest. If the homepage doesn't have a reliable indication of the current version, you can also specify a different URL to check—for an example see the [ruby](https://github.com/ScoopInstaller/Main/blob/master/bucket/ruby.json) manifest.
-- <a name="depends"/>`depends`: Runtime dependencies for the app which will be installed automatically. See also `suggest` (below) for an alternative to `depends`.
-- <a name="env_add_path"/>`env_add_path`: Add this directory to the user's path (or system path if `--global` is used). The directory is relative to the install directory and must be inside the install directory.
-- <a name="env_set"/>`env_set`: Sets one or more environment variables for the user (or system if `--global` is used) ([example](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json)).
-- <a name="extract_dir"/>`extract_dir`: If `url` points to a compressed file (.zip, .7z, .tar, .gz, .lzma, and .lzh are supported), Scoop will extract just the directory specified from it.
-- <a name="extract_to"/>`extract_to`: If `url` points to a compressed file (.zip, .7z, .tar, .gz, .lzma, and .lzh are supported), Scoop will extract all content to the directory specified ([example](https://github.com/lukesampson/scoop-extras/blob/master/bucket/irfanview.json)).
-- <a name="hash"/>`hash`: A string or array of strings with a file hash for each URL in `url`. Hashes are SHA256 by default, but you can use SHA512, SHA1 or MD5 by prefixing the hash string with 'sha512:', 'sha1:' or 'md5:'.
-- <a name="innosetup"/>`innosetup`: set to the boolean `true` (without quotes) if the installer is InnoSetup based.
-- <a name="installer"/>`installer`: Instructions for running a non-MSI installer.
-  - `file`: The installer executable file. For `installer` this defaults to the last URL downloaded. Must be specified for `uninstaller`.
-  - `script`: A one-line string, or array of strings, of commands to be executed as an installer/uninstaller instead of `file`.
-    - `args`: An array of arguments to pass to the installer. Optional.
-  - `keep`: `"true"` if the installer should be kept after running (for future uninstallation, as an example). If omitted or set to any other value, the installer will be deleted after running. See [`extras/oraclejdk`](https://github.com/lukesampson/scoop-extras/blob/master/oraclejdk.json) for an example. This option will be ignored when used in an `uninstaller` directive.
-  - Variables available to `script` and `args`: `$fname` (the file last downloaded), `$manifest` (the deserialized manifest reference), `$architecture` (`64bit` or `32bit`), `$dir` (install directory)
-  - Called during both `scoop install` and `scoop upgrade`.
-- <a name="notes"/>`notes`: A one-line string, or array of strings, with a message to be displayed after installing the app.
-- <a name="persist"/>`persist` A string or array of strings of directories and files to persist inside the data directory for the app. [Persistent data](Persistent-data)
-- <a name="post_install"/>`post_install`: A one-line string, or array of strings, of the commands to be executed after an application is installed. These can use variables like `$dir`, `$persist_dir`, and `$version`. See [Pre- and post-install Scripts](Pre--and-Post-install-scripts) for more details.
-- <a name="pre_install"/>`pre_install`: Same options as `post_install`, but executed before an application is installed.
-- <a name="psmodule"/>`psmodule`: Install as a PowerShell module in `~/scoop/modules`.
-  - `name` (required for `psmodule`): the name of the module, which should match at least one file in the extracted directory for PowerShell to recognize this as a module.
-- <a name="shortcuts"/>`shortcuts`: Specifies the shortcut values to make available in the startmenu. See [sourcetree](https://github.com/lukesampson/scoop-extras/blob/master/bucket/sourcetree.json) for an example. The array has to contain a executable/label pair. The third and fourth element are optional.
-  1. Path to target file [required]
-  1. Name of the shortcut (supports subdirectories: `<AppsSubDir>\\<AppShortcut>` e.g. [sysinternals](https://github.com/lukesampson/scoop-extras/blob/master/bucket/sysinternals.json)) [required]
-  1. Start parameters [optional]
-  1. Path to icon file [optional]
-- <a name="suggest"/>`suggest`: Display a message suggesting optional apps that provide complementary features. See [ant](https://github.com/ScoopInstaller/Main/blob/master/bucket/ant.json) for an example.
-  - `["Feature Name"] = [ "app1", "app2"... ]`<br>e.g. `"JDK": [ "extras/oraclejdk", "openjdk" ]`<br>
-If any of the apps suggested for the feature are already installed, the feature will be treated as 'fulfilled' and the user won't see any suggestions.
-- <a name="uninstaller"/>`uninstaller`: Same options as `installer`, but the file/script is run to uninstall the application.
-  - Called during both `scoop uninstall` and `scoop upgrade`.
-- <a name="url"/>`url`: The URL or URLs of files to download. If there's more than one URL, you can use a JSON - array, e.g. `"url": [ "http://example.org/program.zip", "http://example.org/dependencies.zip" ]`. URLs can be HTTP, HTTPS or FTP.
-  - To change the filename of the downloaded URL, you can append a URL fragment (starting with `#`) to URLs. For example,
+### 可选属性
+
+- `##`: 包含注释的单行字符串或字符串数​​组.
+- `architecture`: 如果应用程序具有 32 位和 64 位版本, 则可以使用 architecture 来包装差异 ([例子](https://github.com/ScoopInstaller/Main/blob/master/bucket/7zip.json)).
+  - `32bit|64bit`: 包含特定于架构的指令 (`bin`, `checkver`, `extract_dir`, `hash`, `installer`,  `pre_install`, `post_install`, `shortcuts`, `uninstaller`, `url`, 和 `msi` [`msi` 已废弃]).
+- [`autoupdate`](App-Manifest-Autoupdate#adding-autoupdate-to-a-manifest): 定义清单怎样自动更新.
+- `bin`: 要在用户路径上可用的程序(可执行文件或脚本)字符串或字符串数​​组.
+  - 你还可以创建一个别名 shim, 它使用与实际可执行文件不同的名称并(可选)将参数传递给可执行文件. 而不是仅仅为可执行文件使用一个字符串, 用例: `[ "program.exe", "alias", "--arguments" ]`. 例子见 [busybox](https://github.com/ScoopInstaller/Main/blob/master/bucket/busybox.json).
+  - 但是, 如果你像这样声明一个 shim, 则必须确保它包含在外部数组中, 例如:
+      `"bin": [ [ "program.exe", "alias" ] ]`. 否则它将被读取为多个单独 shim.
+- [`checkver`](App-Manifest-Autoupdate#adding-checkver-to-a-manifest): App 维护者和开发者可使用 [bin/checkver](https://github.com/lukesampson/scoop/blob/master/bin/checkver.ps1) 工具检查 app 的更新版本. 清单中的 `checkver` 属性是一个正则表达式, 可用于匹配应用主页中应用的当前稳定版本. 例如, 见 [go](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json) 清单. 如果主页没有当前版本的可靠指示, 你还可以指定不同的 URL 进行检查 — 例如见 [ruby](https://github.com/ScoopInstaller/Main/blob/master/bucket/ruby.json) 清单.
+- `depends`: 将自动安装的应用程序的运行时依赖项. 另请参阅 `suggest` (下文)以获取 `depends` 的替代方案.
+- `env_add_path`: 将此目录添加到用户路径(或系统路径, 如果使用了 `--global`). 该目录是相对于安装目录的, 并且必须在安装目录中.
+- `env_set`: 为用户(或系统, 如果使用 `--global`)设置一个或多个环境变量([示例](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json)).
+- `extract_dir`: 如果 `url` 指向压缩文件(支持 .zip, .7z, .tar, .gz, .lzma 和 .lzh), Scoop 将仅提取其中指定的目录.
+- `extract_to`: 如果 `url` 指向一个压缩文件(支持 .zip, .7z, .tar, .gz, .lzma 和 .lzh), Scoop 会将所有内容提取到指定目录([例子](https://github.com/lukesampson/scoop-extras/blob/master/bucket/irfanview.json)).
+- `hash`: `url` 中每个 URL 的文件哈希的字符串或字符串数​​组. 哈希默认为 SHA256, 但你可以使用 SHA512, SHA1 或 MD5, 方法是在哈希字符串前面加上 "sha512:", "sha1:" 或 "md5:".
+- `innosetup`: 如果安装程序基于 InnoSetup, 将此值设为布尔值 `true` (无引号).
+- `installer`: 运行非 MSI 安装程序的指令.
+  - `file`: 安装程序可执行文件. 对于 `installer` 默认为最后下载的 URL. 必须为 `uninstaller` 指定.
+  - `script`: 要作为安装程序/卸载程序而不是 "文件" 执行的命令, 单行字符串或字符串数​​组.
+    - `args`: 要传递给安装程序的参数数组. 可选.
+  - `keep`: `"true"` 安装程序是否应该在运行后保留(例如, 以备将来卸载). 如果省略或设置为任何其他值, 安装程序将在运行后被删除. 例子见 [`extras/oraclejdk`](https://github.com/lukesampson/scoop-extras/blob/master/oraclejdk.json). 在 `uninstaller` 指令中使用此选项时将被忽略.
+  - `script` 和 `args` 可用的变量: `$fname` (上次下载的文件), `$manifest` (反序列化的清单引用), `$architecture` (`64bit` 或 `32bit`), `$dir`(安装目录)
+  - 在 `scoop install` 和 `scoop upgrade` 时都调用.
+- `notes`: 单行字符串或字符串数​​组, 在安装应用程序后显示一条消息.
+- `persist` 保存在应用程序数据目录中的目录和文件的字符串或字符串数​​组. [Persistent data](Persistent-data)
+- `post_install`: 安装应用程序后要执行的命令, 单行字符串或字符串数​​组. 可以使用像 `$dir`, `$persist_dir` 和 `$version` 这样的变量. 有关详细信息, 请参阅 [安装前和安装后脚本](Pre--and-Post-install-scripts).
+- `pre_install`: 与 `post_install` 相同的选项, 但在安装应用程序之前执行.
+- `psmodule`: 安装为 `~/scoop/modules` 中的 PowerShell module/PowerShell 模块.
+  - `name` (`psmodule` 必需): 模块的名称, 它应该与提取目录中的至少一个文件匹配, 以便 PowerShell 将其识别为模块.
+- `shortcuts`: 指定在开始菜单中可用的快捷方式. 例子见 [sourcetree](https://github.com/lukesampson/scoop-extras/blob/master/bucket/sourcetree.json). 该数组必须包含一个可执行文件/标签对. 第 3,4 个元素是可选的.
+  1. 到目标文件的路径 [必需]
+  1. 快捷方式的名称(支持子目录: `<AppsSubDir>\\<AppShortcut>` 例如 [sysinternals](https://github.com/lukesampson/scoop-extras/blob/master/bucket/sysinternals.json))[必需]
+  1. 启动参数 [可选]
+  1. 图标文件路径 [可选]
+- `suggest`: 显示一条消息, 建议提供补充功能的可选应用程序. 例子见 [ant](https://github.com/ScoopInstaller/Main/blob/master/bucket/ant.json).
+  - `["Feature Name"] = [ "app1", "app2"... ]`
+  例子 `"JDK": [ "extras/oraclejdk", "openjdk" ]`
+如果已经安装了针对该功能建议的任何应用程序, 则该功能将被视为 "已满足", 用户将看不到任何建议.
+- `uninstaller`: 与 `installer` 相同的选项, 但运行文件/脚本来卸载应用程序.
+  - 在 `scoop uninstall` 和 `scoop upgrade` 时都调用.
+- `url`: 要下载的文件的 URL. 如果有多个 URL, 可以使用 JSON 数组，例如 `"url": [ "http://example.org/program.zip", "http://example.org/dependencies.zip" ]`. URL 可以是 HTTP, HTTPS 或 FTP.
+  - 要更改下载 URL 的文件名, 可以将 URL 片段(以 `#` 开头)附加到 URL. 例如,
   - `"http://example.org/program.exe"` -> `"http://example.org/program.exe#/dl.7z"`
-  - Note the fragment must start with `#/` for this to work.
-  - In the above example, Scoop will download `program.exe` but save it as `dl.7z`, which will then be extracted automatically with 7-Zip. This technique is commonly used in Scoop manifests to bypass executable installers which might have undesirable side-effects like registry changes, files placed outside the install directory, or an admin elevation prompt.
+  - 注意, 片段必须以 `#/` 开头才能正常工作.
+  - 在上面的示例中, Scoop 将下载 `program.exe`, 但将其保存为 `dl.7z`, 然后使用 7-Zip 自动解压缩. 这种技术通常在 Scoop 清单中用于绕过可执行安装程序, 这些安装程序可能会产生不良副作用, 例如注册表更改, 放置在安装目录之外的文件或管理员权限提示.
 
-### Undocumented Properties
+### 未编档属性
 
-- `cookie`: only found [here](https://github.com/se35710/scoop-java/search?q=cookie&unscoped_q=cookie)
+- `cookie`: 仅见于 [此](https://github.com/se35710/scoop-java/search?q=cookie&unscoped_q=cookie)
 
-### Deprecated Properties
+### 废弃属性
 
-- `_comment`: A one-line string, or array of strings, containing comments. Use `##` instead.
-- `msi` *(deprecated)*: Settings for running an MSI installer<br>
-**This property is deprecated and support will be removed in a future version of Scoop.**- *The new method is to treat .msi files just like a .zip and extract the files from it without running the full install. You can use the new method simply by not including this `msi` property in your manifest.*
-  - `code` *required*: the product code GUID for the MSI installer
-  - `silent`: should normally be `true` to try to install without popups and UAC prompts
+- `_comment`: 包含注释的单行字符串或字符串数​​组. 用 `##` 代替.
+- `msi` *(已废弃)*: 运行 MSI 安装程序的设置
+**此属性已弃用, 并且支持将在 Scoop 的未来版本中删除.**- *新方法是将 .msi 文件视为 .zip 并从中提取文件, 而无需运行完整安装. 可以通过不在清单中包含此 `msi` 属性来使用新方法.*
+  - `code` *必需*: MSI 安装程序的产品代码 GUID
+  - `silent`: 通常应该是 `true` 以尝试在没有弹出窗口和 UAC 提示的情况下安装

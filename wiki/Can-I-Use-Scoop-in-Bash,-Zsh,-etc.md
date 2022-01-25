@@ -1,3 +1,3 @@
-# Yes!
+# 是的!
 
-Scoop installs a `sh`-based shim for itself (similar to the shim for `cmd.exe`)
+Scoop 为它自己安装了一个基于 `sh` 的 shim(类似于 `cmd.exe` 的 shim)
