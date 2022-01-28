@@ -1,29 +1,37 @@
-Here are some example 'get-all-my-stuff' scripts. 
+以下是一些示例 'get-all-my-stuff' 脚本. 
 
-It's assumed that you have Powershell 5 and you've already installed Scoop, e.g.
+假设你有 Powershell 5 或以上且安装了 Scoop, 例如
+
 ```powershell
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 set-executionpolicy unrestricted -s cu
 ```
 
-### Example dev environment setup
+### 示例开发环境设置
+
 ```powershell
-# utils
+# utils/实用工具
+
 scoop install 7zip curl sudo git openssh coreutils grep sed less
 
-# programming languages
+# programming languages/编程语言
+
 scoop install python ruby go nodejs
 
-# WAMP stack
+# WAMP stack/WAMP(Windows Apache MariaDB PHP) 栈
+
 scoop install apache mariadb php
 iex (new-object net.webclient).downloadstring('https://gist.github.com/lukesampson/6546858/raw/apache-php-init.ps1')
 
-# console theme
+# console theme/控制台主题
+
 scoop install concfg pshazz
 concfg import solarized small
 
 # vim
+
 scoop install vim
+
 '
 set ff=unix
 
@@ -36,15 +44,17 @@ set backupdir=$TEMP
 
 ```
 
-### Example production environment setup
+### 示例生产环境设置
 
 ```powershell
 scoop install sudo 7zip
 
-# make these available to system processes
+# make these available to system processes/让这些可用于系统进程
+
 sudo scoop install git ruby postgres --global
 
-# just for me
+# just for me/自用
+
 scoop install grep coreutils 
 ```
 

@@ -1,16 +1,16 @@
-_Article stub. Please fill out/correct as needed. Maybe this is already or better documented elsewhere, in that case remove/redirect._
+_文章存根. 请按需要填写/修正. 也许这已经或更好地记录在其他地方, 那时删除/重定向._
 
-For general understanding and troubleshooting it can be helpful to know what folders Scoop uses and where they are. These are examples, configuration options could change where they are on your machine.
+对于一般理解和故障排除, 了解 Scoop 使用哪些文件夹以及它们在哪里会很有帮助. 这些是示例, 配置选项可能会更改它们在你机器上的位置.
 
-`%USERPROFILE%\scoop` - per user root location (default)  
-`%SCOOP_GLOBAL%` - root location of apps installed for all users, `%SYSTEMDRIVE%\ProgramData\scoop`  
+`%USERPROFILE%\scoop` - 每个用户根位置 (默认)  
+`%SCOOP_GLOBAL%` - 为所有用户安装的应用程序的根位置, `%SYSTEMDRIVE%\ProgramData\scoop`  
   
-`...\scoop\buckets` - manifests of installable apps (also a git clone of the bucket source repositories)  
-`...\scoop\cache` - the downloaded installers  
+`...\scoop\buckets` - 可安装 app 的 manifest (也是 bucket 源存储库的 git clone/克隆)  
+`...\scoop\cache` - 下载的安装程序
 `...\scoop\persist` - ...?  
-`...\scoop\shims` - added to PATH, wrappers that point to the installed applications  
+`...\scoop\shims` - 添加到 PATH, 指向已安装应用程序的 wrapper/包装器  
 
-`%USERPROFILE%\.config\scoop` - _(?) seems to be where network path to primary Scoop repository is defined_
+`%USERPROFILE%\.config\scoop` - _(?) 似乎是定义主 Scoop 存储库的网络路径的地方_
 
 
 

@@ -1,7 +1,7 @@
-For an app to be acceptable for the main bucket, it should be:
+对于 main bucket 可接受的 app, 它应该是:
 
-* a reasonably well-known and widely used developer tool
-* the latest stable version of the program
-* the full version i.e. not a trial version
-* a fairly standard install (e.g. uses a version-specific download URL, no elaborate pre/post install scripts)
-* a non-GUI tool
+* 一个相当知名和广泛使用的开发者工具
+* 该程序的最新稳定版本
+* 完整版, 即不是试用版
+* 相当标准的安装 (例如, 使用特定于版本的下载 URL, 没有特定的 pre/post install 脚本)
+* 非 GUI 工具
