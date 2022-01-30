@@ -8,7 +8,7 @@ scoop help
 
 要查看特定命令的帮助, 运行:
 
-```
+```command line
 scoop help <command>
 ```
 
