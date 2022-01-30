@@ -1,36 +1,36 @@
-*Do you have a question that's not answered here? Please create an issue.*
+*你有在这里没有回答的问题?请创建一个 issue.*
 
-### How do I update my apps?
+### 如何更新我的 app?
 
-First, update Scoop to get the latest manifests:
+首先, 更新 Scoop 以得到最新清单:
 
 ```
 scoop update
 ```
 
-Then update the app, e.g. Git:
+然后更新 app, 例如 Git:
 
 ```
 scoop update git
 ```
 
-If you want to update all your apps at once, you can use the wildcard '*':
+如果你想一次更新所有应用, 可以使用通配符 '*':
 
 ```
 scoop update *
 ```
 
-### How do I install a specific version of an app?
+### 如何安装特定版本的应用程序?
 
-If you need to install a specific version of an app, use `scoop install [app]@[version]`. E.g. for Git:
+如果你需要安装特定版本的应用程序, 用 `scoop install [app]@[version]`. 例如 对于 Git:
 
 ```
 scoop install git@2.23.0.windows.1
 ```
 
-### Can I install multiple versions of a specific app with scoop?
+### 我可以使用 scoop 安装特定应用程序的多个版本吗?
 
-You can install multiple versions of an app by using the `@[version]` syntax with the install command:
+你可以通过 install 命令使用 `@[version]` 语法安装多个版本:
 
 ```
 scoop install git@2.19.0.windows.1
@@ -38,39 +38,44 @@ scoop install git@2.19.0.windows.1
 scoop install git@2.23.0.windows.1
 ```
 
-You also install new versions of an app by running `scoop update` when a new version is available: the old version will be persisted until you remove them with the `scoop cleanup` command.
+当有新版本可用时, 你还可以通过运行 `scoop update` 来安装新版本的应用程序: 旧版本将一直存在, 直到你使用 `scoop cleanup` 命令将其删除.
 
-**Please note:** running `scoop list` or `scoop info` will show the LATEST version installed, not all of them.
+**请注意:** 运行 `scoop list` 或 `scoop info` 会显示安装的最新版本, 而非全部.
 
-### How do I switch between different versions of an app?
+### 如何在一个 app 的不同版本间切换?
 
-Use `scoop reset [app]@[version]`. E.g. for terraform:
+用 `scoop reset [app]@[version]`. 例如 对于 terraform:
 
 ```
 scoop reset terraform@0.11.14
 ```
-will set the active installation of terraform to version 0.11.14.
+
+将 terraform 的活动安装设置为版本 0.11.14.
+
 ```
 scoop reset terraform@0.12.11
 ```
-will reset the active installation of terraform to version 0.12.11.
+
+将 terraform 的活动安装设置为版本 0.12.11.
+
 ```
 scoop reset terraform
 ```
-will reset the active installation of terraform to the *latest installed version*.
 
-**Please note:** `scoop reset` allows you to switch only between versions that are already installed.
+将 terraform 的活动安装重置为 *最新安装的版本*.
 
-### How do I uninstall an app?
+**请注意:** `scoop reset` 仅允许你在已安装的版本之间切换.
 
-Use `scoop uninstall [app]`. E.g. for Git:
+### 如何卸载 app?
+
+用 `scoop uninstall [app]`. 例如 对于 Git:
 
 ```
 scoop uninstall git
 ```
 
-### Scoop is very slow when installing, locks up the CPU, or shows access denied errors
+### Scoop 安装时非常缓慢, 锁定 CPU, 或显示 access denied errors
 
-It's likely that your antivirus or anti-malware program is doing a realtime scan as files are being extracted. Please see [Antivirus and Anti-Malware Problems](https://github.com/lukesampson/scoop/wiki/Antivirus-and-Anti-Malware-Problems) for more information and possible workarounds.
+在提取文件时, 你的防病毒或反恶意软件程序可能正在执行实时扫描. 更多信息和可能的解决方法参见 [Antivirus and Anti-Malware Problems](https://github.com/lukesampson/scoop/wiki/Antivirus-and-Anti-Malware-Problems).
 
-*[todo: insert more FAQS here]*
+*[todo: 在这插入更多 FAQ]*

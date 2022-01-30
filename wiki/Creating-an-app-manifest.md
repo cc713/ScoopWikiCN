@@ -1,7 +1,8 @@
-If you want to install a program that's not included in Scoop, it's easy to create an [app manifest](App-Manifests) yourself.
+如果你想安装 Scoop 中未包含的程序, 你可以轻松创建 [app manifest](App-Manifests).
 
-### A basic example
-Here's how to create and install a manifest for an 'app' that says hello, in just a few lines of powershell.
+### 一个基本例子
+
+以下是创建和安装说 hello 的 'app' 的清单, 只用数行 powershell.
 
 ```powershell
 # write an app manifest to hello.json
@@ -14,20 +15,26 @@ scoop install hello
 hello # -> should output 'Hello, <your-username>!'
 ```
 
-### Sharing your app
+### 分享你的 app
 
-##### Share on your network
-If you want others on your network to be able to install from your app manifest, you could just put it on a network share location, e.g. \\shared\files\scoop\hello.json. Then, for others to install your app, you can tell them to run:
-    
-    scoop install \\shared\files\scoop\hello.json
+##### 在你的网络上共享
 
-##### Share with the world
-If you make your app manifest publicly available on the web, anyone can install it once they know the URL. For example, I've made a GitHub gist for hello.json [here](https://gist.github.com/lukesampson/6446567). Now anyone can install it:
+如果你希望网络上的其他人能够从你的应用清单安装, 可以将其放在网络共享位置, 例如 \\shared\files\scoop\hello.json. 然后, 为了让其他人安装你的应用程序, 你可以告诉他们运行:
 
-    scoop install https://gist.github.com/lukesampson/6446567/raw/hello.json
+```command line
+scoop install \\shared\files\scoop\hello.json
+```
 
-### Next steps
-If you ran some of these examples, you probably noticed a warning saying 'no hash in manifest'. For reference information on specifying file hashes and much more in your manifests, see the [App Manifests reference](App-Manifests).
+##### 与世界分享
 
-If you want to maintain a collection of apps, see the page on [Buckets](Buckets) for more information.
+如果你在网络上公开你的应用清单, 任何人只要知道 URL 就可以安装它. 例如, 我为 hello.json 制作了一个 GitHub gist 在 [这](https://gist.github.com/lukesampson/6446567). 现在任何人都可以安装它:
 
+```command line
+scoop install https://gist.github.com/lukesampson/6446567/raw/hello.json
+```
+
+### 下一步
+
+如果你运行其中一些示例, 可能会注意到一条警告说 'no hash in manifest'. 有关在清单中指定文件 hash 等的参考信息, 请参阅 [App Manifests reference](App-Manifests).
+
+如果你想维护应用程序集合, 请参阅[Buckets](Buckets)页面了解更多信息.

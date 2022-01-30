@@ -1,49 +1,56 @@
-## Installing Docker
+## 安装 Docker
+
 `scoop install docker`
 
-_Please note that this will not install Docker Engine_
+_请注意这不会安装 Docker Engine_
 
-## Using Docker CLI
+## 使用 Docker CLI
 
-Connect to Docker Engine with [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/):
+通过 [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) 连接到 Docker Engine:
 
 ```
 docker -H <host:port>
 ```
 
-The Docker Engine daemon must listen to a [tcp socket](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option).
+Docker Engine 守护程序必须监听一个 [tcp socket](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option).
 
-## Provision Docker Engine with Docker Machine
+## 使用 Docker Machine 配置 Docker Engine
 
-Requirements: [Virtualbox](https://www.virtualbox.org/), [VMware](https://www.vmware.com/), Hyper-V or any of the [Docker Machine](https://docs.docker.com/machine/overview/) [drivers](https://docs.docker.com/machine/drivers/)
+要求: [Virtualbox](https://www.virtualbox.org/), [VMware](https://www.vmware.com/), Hyper-V 或任何 [Docker Machine](https://docs.docker.com/machine/overview/) [drivers](https://docs.docker.com/machine/drivers/)
 
-1. Create our Docker base machine (will be named _default_):
+1. 创建我们的 Docker 基础机器 (会被命名为 _default_):
+
 ```
 docker-machine create default
 ```
 
-2. Each time starting working with Docker
+2. 每次开始使用 Docker
+
 ```
 docker-machine start
 docker-machine env | Invoke-Expression
 ```
 
-3. Then we can bring up any Docker image
+3. 然后我们可以调出任何 Docker 镜像
+
 ```
 docker run ubuntu /bin/echo "Hello world"
 ```
 
-4. When finished:
+4. 完成时:
+
 ```
 docker-machine stop
 ```
 
-5. Getting our Docker machine:
+5. 获取我们的 Docker machine:
+
 ```
 docker-machine ls
 ```
 
-### Accessing from WSL environment
+### 从 WSL 环境访问
+
 ```
 eval $(docker-machine.exe env docker-host --shell wsl ) && export DOCKER_CERT_PATH=$(wslpath $DOCKER_CERT_PATH)
 ```

@@ -1,10 +1,10 @@
-#### How is Scoop different to [Chocolatey](http://chocolatey.org)?
+#### Scoop 和 [Chocolatey](http://chocolatey.org) 有什么不同?
 
-* **Installs to ~/scoop/ by default.** You can set up your own programs and not worry that they'll interfere with other users' programs (or theirs with yours, perhaps more importantly). You can optionally choose to install programs system-wide if you have administrator rights.
-* **No UAC popups, doesn't require admin rights.** Since programs are installed just for your user account, you won't be interrupted by UAC popups.
-* **Doesn't pollute your path.** Where possible, Scoop puts your program shims in a single directory and just adds that to your path.
-* **Doesn't use NuGet.** NuGet is a great solution to the problem of managing software library dependencies. Scoop avoids this problem altogether: each program you install is isolated and independent.
-* **Simpler than packaging.** Scoop isn't a package manager, rather it reads plain JSON manifests that describe how to install a program and its dependencies.
-* **Simpler app repository.** Scoop just uses Git for its app repository. You can create your own repo, or even just a single file that describes an app to install.
+* **默认安装到 ~/scoop/.** 你可以设置自己的程序, 而不必担心它们会干扰其他用户的程序(或者也许更重要的是他们的程序干扰你的程序). 如果你具有管理员权限, 则可以选择在系统范围内安装程序.
+* **无 UAC 弹窗, 无需管理员权限.** 由于程序只是为你的用户帐户安装的, 因此不会被 UAC 弹窗打断.
+* **不污染路径.** 在可能的情况下, Scoop 会将你的程序 shims 放在一个目录中, 然后将其添加到你的路径中.
+* **不使用 NuGet.** NuGet 是管理软件库依赖关系问题的一个很好的解决方案. Scoop 完全避免了这个问题: 你安装的每个程序都是隔离和独​​立的.
+* **比打包简单.** Scoop 不是包管理器, 而是读取描述如何安装程序及其依赖项的纯 JSON 清单.
+* **更简单的 app 存储库.** Scoop 的 app 存储库只使用 Git. 你可以创建自己的存储库, 甚至只是一个描述要安装的应用程序的文件.
 
-**NOTE** While it would be easy to install Skype with Scoop, this will probably never be in Scoop's main bucket (app repository). Scoop focuses on open-source, command-line developer tools. The [scoop-extras](https://github.com/lukesampson/scoop-extras) bucket is for non developer tools.
+**注意** 虽然用 Scoop 安装 Skype 很容易, 但这可能永远不会出现在 Scoop 的 main bucket(应用程序存储库)中. Scoop 专注于开源的命令行开发工具. [scoop-extras](https://github.com/lukesampson/scoop-extras) bucket 是为非开发者工具准备的.
