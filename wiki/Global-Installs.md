@@ -1,29 +1,29 @@
-By default, Scoop installs apps just for your user account. Apps are installed under ~\scoop\apps, and only your environment variables are modified. This is usually fine, especially in your dev environment.
+默认情况下, Scoop 仅为你的用户帐户安装应用程序. 应用程序安装在 ~\scoop\apps 下, 并且只修改你的环境变量. 这通常很好, 尤其是在你的开发环境中.
 
-In some cases you might want to install an app system-wide so that it's accessible to other users, including the local system account. Scoop provides a `--global` switch to support this case.
+在某些情况下, 你可能希望在系统范围内安装应用程序, 以便其他用户(包括本地系统帐户)可以访问它. Scoop 提供了一个 `--global` 开关来支持这种情况.
 
-Global installs require admin permissions, because they install to \ProgramData\scoop, and set system environment variables. For this reason, this example uses the `sudo` command, which is a rough equivalent of the UNIX command to run a command with superuser privileges. You can install this by running:
+全局安装需要管理员权限, 因为它们安装到 \ProgramData\scoop, 并设置系统环境变量. 出于这个原因, 这个例子使用了 `sudo` 命令, 它大致相当于 UNIX 命令来运行具有超级用户权限的命令. 要安装它, 运行:
 
-    scoop install sudo
+```command line
+scoop install sudo
+```
 
-Otherwise, you can just open a normal Powershell console using Run As Administrator.
+此外, 你可以用管理员身份运行打开一个普通的 Powershell 控制台.
 
-### Examples
-To install an app:
+### 示例
 
-    sudo scoop install git --global
+要安装一个 app:
 
-*Note: if you want the app to be available to the local system account, you will need to restart the system after you install your first app globally. This is because changes made to environment variables don't take effect for the local system account until you restart Windows (see [here](http://support.microsoft.com/kb/821761)).*
+```command line
+sudo scoop install git --global
+```
 
-You can also use the short form for `--global`, `-g`.
+*注意：如果你希望应用程序可用于本地系统帐户, 则需要在全局安装第一个应用程序后重新启动系统. 这是因为在重新启动 Windows 之前, 对环境变量所做的更改不会对本地系统帐户生效 (见 [此](http://support.microsoft.com/kb/821761)).*
 
-E.g. to update a globally installed app using the short form:
+你也可以使用 `--global` 的缩写形式, `-g`.
 
-    sudo scoop update git -g
+例如, 使用简写形式更新全局安装的应用程序:
 
-
-
-
-
-
-
+```command line
+sudo scoop update git -g
+```

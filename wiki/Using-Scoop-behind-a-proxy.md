@@ -1,20 +1,21 @@
-### Do you need this?
-If your proxy is already configured in Internet Options and it doesn't require authentication, you shouldn't need to do anything else for Scoop to use it.
+### 你需要这个吗?
 
-These instructions are for people who
+如果你的代理已在 Internet 选项中配置且不需要身份验证, 则你无需为 Scoop 执行任何其他操作即可使用它.
 
-1. need to authenticate with their proxy, either using their Windows credentials or another username/password
-2. want to use a proxy server for Scoop that isn't configured in Internet Options.
+这些说明适用于那些
 
-## Installation
+1. 需要通过他们的代理进行身份验证, 使用他们的 Windows 凭据或其他用户名/密码
+2. 想要为 Scoop 使用未在 Internet 选项中配置的代理服务器.
 
-Normally, Scoop is installed with
+## 安装
+
+通常, Scoop 通过以下命令安装
 
 ```powershell
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 ```
 
-If you're behind a proxy you might need to run one or more of these commands first:
+如果你使用代理, 则可能需要先运行以下一个或多个命令:
 
 ```
 # If you want to use a proxy that isn't already configured in Internet Options
@@ -27,74 +28,79 @@ If you're behind a proxy you might need to run one or more of these commands fir
 [net.webrequest]::defaultwebproxy.credentials = new-object net.networkcredential 'username', 'password'
 ```
 
-These commands will affect any web requests using `net.webclient` until the end of your powershell session.
+这些命令将影响使用 `net.webclient` 的任何 Web 请求, 直到你的 powershell 会话结束.
 
-## Configuring Scoop to use your proxy
+## 配置 Scoop 以使用你的代理
 
-Once Scoop is installed, you can use `scoop config` to configure your proxy. Here's an excerpt from `scoop help config`:
+安装 Scoop 后, 你可以使用 `scoop config` 来配置你的代理. 这是 `scoop help config`的摘录:
 
 ---
 `scoop config proxy [username:password@]host:port`
 
-By default, Scoop will use the proxy settings from Internet Options, but with anonymous authentication.
+默认情况下, Scoop 将使用 Internet 选项中的代理设置, 但使用匿名身份验证.
 
-* To use the credentials for the current logged-in user, use `currentuser` in place of `username:password`
-* To use the system proxy settings configured in Internet Options, use `default` in place of `host:port`
-* An empty or unset value for proxy is equivalent to `default` (with no username or password)
-* To bypass the system proxy and connect directly, use `none` (with no username or password)
+* 要使用当前登录用户的凭据, 请使用 `currentuser` 代替 `username:password`
+* 要使用 Internet 选项中配置的系统代理设置, 用 `default` 代替 `host:port`
+* 代理的空值或未设置值相当于 `default` (没有用户名或密码)
+* 要绕过系统代理直接连接, 用 `none` (没有用户名或密码)
 
 ---
 
-## Config examples
+## 配置示例
 
-##### Use your Windows credentials with the default proxy configured in Internet Options
+##### 将你的 Windows 凭据与 Internet 选项中配置的默认代理一起使用
 
 ```powershell
 scoop config proxy currentuser@default
 ```
 
-##### Use hard-coded credentials with the default proxy configured in Internet Options
+##### 使用硬编码凭据和 Internet 选项中配置的默认代理
 
 ```powershell
 scoop config proxy user:password@default
 ```
 
-##### Use a proxy that isn't configured in Internet Options
+##### 使用未在 Internet 选项中配置的代理
+
 ```powershell
-# anonymous authentication to proxy.example.org on port 8080:
+# anonymous authentication to proxy.example.org on port 8080:/在端口 8080 上对 proxy.example.org 进行匿名身份验证:
+
 scoop config proxy proxy.example.org:8080
 
-# or, with authentication:
+# or, with authentication:/或, 带认证:
+
 scoop config proxy username:password@proxy.example.org:8080
 ```
 
-##### Bypassing the proxy configured in Internet Options
+##### 绕过 Internet 选项中配置的代理
 
 ```powershell
 scoop config rm proxy
 ```
 
-##### Using a password containing `@` or `:`
+##### 使用包含 `@` 或 `:` 的密码
 
-If your proxy password contains `@` or `:` characters, you need to escape them using a `\`, e.g.:
+如果你的代理密码包含 `@` 或 `:` 字符, 则需要使用 `\` 对其进行转义, 例如:
 
 ```powershell
 scoop config proxy 'username:p\@ssword@proxy.example.org:8080'
 ```
 
-##### proxy for "bucket add" command
-This is a potential bug but I found a workaround:
+##### 对 "bucket add" 命令的代理
 
-If you try to run
-```scoop config proxy currentuser@proxy.example.org:8080``` and then ```scoop bucket add extras``` it won't work because scoop passes these credentials directly to git and git has a different proxy format.
-So for "bucket add" to work you will have to change the proxy string to the format git understand so ```currentuser@proxy.example.org:8080``` becomes ```:@proxy.example.org:8080```
+这是一个潜在的 bug, 但我找到了解决方法:
 
-so this will work:
+如果你尝试运行 `scoop config proxy currentuser@proxy.example.org:8080` 然后 `scoop bucket add extras` 它不起作用, 因为 scoop 将这些凭据直接传递给 git 且 git 具有不同的代理格式. 因此, 要使 "bucket add" 工作, 你必须将代理字符串更改为 git 理解的格式, 以便 `currentuser@proxy.example.org:8080 ` 变为 `:@proxy.example.org:8080 `
+
+因此下面命令可用:
+
 ```powershell
 scoop config proxy ':@proxy.example.org:8080'
 scoop bucket add extras
 ```
-but then you will have to change the proxy string back to normal to install actual packages: 
+
+但是你必须将代理字符串更改回正常才能安装实际软件包:
+
 ```powershell
 scoop config proxy 'currentuser@proxy.example.org:8080'
 scoop install vscode

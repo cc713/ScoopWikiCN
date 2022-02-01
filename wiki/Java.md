@@ -1,65 +1,66 @@
-# Choice of JDKs
+# 选择 JDK
 
-Java development kits (JDK) and runtime environments (JRE) are available through the [Scoop Java bucket](https://github.com/scoopinstaller/java).
+Java development kits (JDK) 和运行时环境 (JRE) 在 [Scoop Java bucket](https://github.com/scoopinstaller/java) 中.
 
-To add the bucket, run:
-```
+要添加 bucket, 运行:
+
+```command line
 scoop bucket add java
 ```
 
 ## OpenJDK
 
-[OpenJDK](http://openjdk.java.net) is the preferred JDK (because of its Open Source [license](http://openjdk.java.net/legal/gplv2+ce.html)).
+[OpenJDK](http://openjdk.java.net) 是首选的 JDK (因为它的开源 [许可证](http://openjdk.java.net/legal/gplv2+ce.html)).
 
-The Scoop Java bucket contains five different OpenJDK builds.
+Scoop Java bucket 包含 5 种不同 OpenJDK 构建.
 
 ### Oracle OpenJDK
 
-Oracle's OpenJDK version ([openjdk.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/openjdk.json)) can be installed with:
+Oracle 的 OpenJDK 版本 ([openjdk.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/openjdk.json)) 可用以下命令安装:
 
-```
+```command line
 scoop install openjdk
 ```
 
 ### AdoptOpenJDK
 
-[AdoptOpenJDK](https://adoptopenjdk.net) has versions with HotSpot and Eclipse OpenJ9 JVMs.
+[AdoptOpenJDK](https://adoptopenjdk.net) 有带 HotSpot 和 Eclipse OpenJ9 JVMs 的版本.
 
 #### Oracle HotSpot JVM
 
-##### OpenJDK 8 with Oracle HotSpot JVM
+##### 带 Oracle HotSpot JVM 的 OpenJDK 8 
 
-[adopt8-upstream.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adopt8-upstream.json) is the preferred Java 8 JDK. Oracle does not distribute Oracle 8 JDK:s anymore, see FAQ [here](https://www.oracle.com/technetwork/java/javase/overview/oracle-jdk-faqs.html). Oracle 8 JRE is available through the [oraclejre8.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/oraclejre8.json) manifest.
+[adopt8-upstream.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adopt8-upstream.json) 是首选的 Java 8 JDK. Oracle 不再发布 Oracle 8 JDK, 见 [FAQ](https://www.oracle.com/technetwork/java/javase/overview/oracle-jdk-faqs.html). Oracle 8 JRE 可通过 [oraclejre8.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/oraclejre8.json) manifest 安装.
 
-##### AdoptOpenJDK with Oracle HotSpot JVM
+##### 带 Oracle HotSpot JVM 的 AdoptOpenJDK 
 
-[adoptopenjdk-hotspot.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adoptopenjdk-hotspot.json) can be installed with:
+安装 [adoptopenjdk-hotspot.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adoptopenjdk-hotspot.json):
 
-```
+```command line
 scoop install adoptopenjdk-hotspot
 ```
 
-##### AdoptOpenJDK JRE with Oracle HotSpot JVM (runtime environment)
+##### 带 Oracle HotSpot JVM(运行时环境) 的 AdoptOpenJDK JRE
 
-[adoptopenjdk-hotspot-jre.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adoptopenjdk-hotspot-jre.json) can be installed with:
+安装 [adoptopenjdk-hotspot-jre.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adoptopenjdk-hotspot-jre.json):
 
-```
+```command line
 scoop install adoptopenjdk-hotspot-jre
 ```
 
 #### Eclipse OpenJ9 JVM
 
-##### AdoptOpenJDK with Eclipse OpenJ9 JVM
+##### 带 Eclipse OpenJ9 JVM 的 AdoptOpenJDK 
 
-[adoptopenjdk-openj9.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adoptopenjdk-openj9.json) can be installed with:
+安装 [adoptopenjdk-openj9.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adoptopenjdk-openj9.json):
 
 ```
 scoop install adoptopenjdk-openj9
 ```
 
-##### AdoptOpenJDK JRE with Eclipse OpenJ9 JVM (runtime environment)
+##### 带 Eclipse OpenJ9 JVM(运行时环境) 的 AdoptOpenJDK JRE
 
-[adoptopenjdk-openj9-jre.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adoptopenjdk-openj9-jre.json) can be installed with:
+安装 [adoptopenjdk-openj9-jre.json](https://github.com/ScoopInstaller/Java/blob/master/bucket/adoptopenjdk-openj9-jre.json):
 
 ```
 scoop install adoptopenjdk-openj9-jre
@@ -73,7 +74,7 @@ scoop install adoptopenjdk-openj9-jre
 
 ### ojdkbuild
 
-[ojdkbuild](https://github.com/ojdkbuild/ojdkbuild) manifests requires [lessmsi](https://github.com/ScoopInstaller/Main/blob/master/bucket/lessmsi.json) to be installed and configured by running `scoop config MSIEXTRACT_USE_LESSMSI true`.
+[ojdkbuild](https://github.com/ojdkbuild/ojdkbuild) manifests 需要安装 [lessmsi](https://github.com/ScoopInstaller/Main/blob/master/bucket/lessmsi.json) 且通过 `scoop config MSIEXTRACT_USE_LESSMSI true` 配置.
 
 ### Amazon Corretto
 
@@ -82,24 +83,23 @@ scoop install adoptopenjdk-openj9-jre
 
 ## Oracle JDK
 
-[Oracle’s Java](https://www.oracle.com/technetwork/java/index.html) is also available in the [oraclejdk](https://github.com/ScoopInstaller/Java/blob/master/bucket/oraclejdk.json) manifest.
+[Oracle’s Java](https://www.oracle.com/technetwork/java/index.html) 也在 [oraclejdk](https://github.com/ScoopInstaller/Java/blob/master/bucket/oraclejdk.json) manifest 中可用.
 
 
-# Switching Javas
+# 切换 Java
 
-There are two solutions available today for switching java:
+今天有两种解决方案可用于切换 java:
 
 1. `scoop reset <java>[@<version>]`
-2. Using [find-java](https://github.com/lukesampson/scoop-extras/blob/master/bucket/find-java.json) from [extras](https://github.com/lukesampson/scoop-extras)
+2. 用 [extras](https://github.com/lukesampson/scoop-extras) 中的 [find-java](https://github.com/lukesampson/scoop-extras/blob/master/bucket/find-java.json)
 
-`scoop reset` works very well for the current session, and will also update the user's path. Please note https://github.com/lukesampson/scoop/issues/3822 - currently this isn't working for all available packages.
+`scoop reset` 非常适合当前会话, 并且还会更新用户路径. 请注意 https://github.com/lukesampson/scoop/issues/3822 - 目前这不能用于所有可用的软件包.
 
-Globally installed javas takes precedence over user-installed javas, so running `sudo scoop install -g oraclejdk-lts` will install a java that is always default for new sessions.
+全局安装的 java 优先于用户安装的 java, 因此运行 `sudo scoop install -g oraclejdk-lts` 将安装一个始终默认用于新会话的 java.
 
+## 版本切换示例
 
-## Example of switching between versions
-
-```
+```command line
 PS C:> scoop install oraclejdk
 Installing 'oraclejdk' (12.0.2-10) [64bit]
 
