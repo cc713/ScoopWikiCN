@@ -1,50 +1,58 @@
-Git for Windows comes with a "Git Bash" that gives you good Git functionality over SSH. But what if you want to use Powershell instead of Bash? This guide shows you how to do just that, **without needing to re-type your password each time you connect**.
+Git for Windows 带有一个 "Git Bash", 它通过 SSH 为你提供良好的 Git 功能. 但如果你想使用 Powershell 而不是 Bash 怎么办? 本指南向你展示了如何做到这一点, **无需在每次连接时重新输入密码**.
 
-This guide uses Github as an example, but the same principals apply for any SSH-accessible Git repo.
+本指南使用 Github 作为示例, 但相同的原则适用于任何 SSH 可访问的 Git 存储库.
 
-This assumes you have [installed Scoop](https://github.com/lukesampson/scoop/wiki/Quick-Start), and have a basic knowledge of Git.
+假设你已经 [安装了 Scoop](https://github.com/lukesampson/scoop/wiki/Quick-Start), 且对 Git 有基本知识.
 
-*Based on [this guide from GitHub](https://help.github.com/articles/generating-ssh-keys#platform-windows)*
+*基于 [来自 GitHub 的这个指南](https://help.github.com/articles/generating-ssh-keys#platform-windows)*
 
-### Install
+### 安装
 
-First up, install the programs you need:
+首先, 安装所需的程序:
 
-    scoop install git openssh
+```command line
+scoop install git openssh
+```
 
-### Create a private key
+### 创建一个私钥
 
-If you don't already have an SSH key, you can create one like this:
+如果你还没有 SSH 密钥, 可以像这样创建一个:
 
-<pre>
+```powershell
 PS> <b>ssh-keygen</b>
 Generating public/private rsa key pair.
 Enter file in which to save the key (/c/Users/<b>you</b>//.ssh/id_rsa): <b>[press enter]</b>
 Enter passphrase (empty for no passphrase): <b>[type your password]</b>
 Enter same passphrase again: <b>[and once more]</b>
 ...
-</pre>
+```
 
-Then [add your SSH key to GitHub](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account).
+然后 [添加你的 SSH 密钥到 GitHub](https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account).
 
-### Use Pshazz to remember your password
+### 用 Pshazz 记住你的密码
 
-Pshazz includes a plugin for SSH that can save your SSH key password in Windows Credential Manager so you don't need to re-type it every time you push to your Github repo. Install it like this:
+Pshazz 包含一个 SSH 插件, 可以将你的 SSH 密钥密码保存在 Windows 凭据管理器中, 因此无需在每次推送到 Github 存储库时都重新输入. 安装它:
 
-    scoop install pshazz
+```command line
+scoop install pshazz
+```
 
-And you can set up git client to store your GitHub access token to Windows Credential Manager by:
+你可以通过以下方式设置 git 客户端以将你的 GitHub 访问令牌存储到 Windows 凭据管理器:
 
-    git config --global credential.helper manager
+```command line
+git config --global credential.helper manager
+```
 
-You should see a popup asking for your SSH key password: enter it and check the box to save your password. Back in your Powershell session, you should see an `Identity Added` message. Whenever you start a Powershell session from now on, Pshazz will make sure the `ssh-agent` is running and load your private key using your saved password.
+你应该会看到一个询问你的 SSH 密钥密码的弹出窗口: 输入它并选中该框以保存你的密码. 回到你的 Powershell 会话中, 你应该会看到 `Identity Added` 消息. 从现在开始, 无论何时启动 Powershell 会话, Pshazz 都会确保 `ssh-agent` 正在运行, 并使用你保存的密码加载你的私钥.
 
-### Test it out
+### 测试
 
-To make sure everything's working, run:
+要确认是否一切正常, 运行:
 
-    ssh -T git@github.com
+```command line
+ssh -T git@github.com
+```
 
-After a warning or two, you should see a message like this:
+一两次警告后, 你应该会看到这样的消息:
 
-    Hi <username>! You've successfully authenticated, but GitHub does not provide shell access. 
+> Hi <username>! You've successfully authenticated, but GitHub does not provide shell access. 

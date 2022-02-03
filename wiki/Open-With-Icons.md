@@ -1,24 +1,26 @@
-# Open With and File Association Icons
+# 打开方式和文件关联图标
 
-In Windows Explorer, you can assign a program to open some file extension by default, or add it to a list of programs you can quickly open any file with from the right-click "Open with" menu. The "Contained & Controlled" nature of scoop packages makes that a bit harder, but it's still possible.
+在 Windows 资源管理器中, 你可以指定一个程序以默认打开某些文件扩展名, 或者将其添加到可以从右键单击 "打开方式" 菜单中快速打开任何文件的程序列表中。scoop 包的 "包含和控制" 性质使这有点困难, 但它仍是可能的.
 
-You can add new programs to the list for any file type by right-clicking > `Open With` > `Choose another app` > `Browse...`. However, there are a few things to keep in mind.
+你可以通过右键单击 > `打开方式` > `选择其它应用` > `浏览...` 将新程序添加到任何文件类型的列表中. 但是, 有几件事要记住.
 
-It is IMPERATIVE that you add the proper program path (example: `$HOME/scoop/apps/mpv/current/mpv.exe`), and not the shim path.
-   - If you do not go through the `current` junction shortcut and go through the actual version directory (like `0.32.0`), the association will break whenever you update the program.
+必须添加正确的程序路径 (例子: `$HOME/scoop/apps/mpv/current/mpv.exe`), 而不是 shim 路径.
 
-If you add the shim path (example: `$HOME/scoop/shims/mpv.exe`) instead, it will spell disaster.
- - The shim will show up as a nameless blob with an ugly "unknown" icon in the "Open With" menu.
- - They will be impossible to tell between when you have multiple shims registered.
- - All the associated files too will forever be haunted by that icon.
- - Sometimes the shim won't even close itself after launching the program.
+ - 如果你不通过 `current` 连接快捷方式并通过实际版本目录 (如 `0.32.0`), 每当你更新程序时, 关联就会中断.
 
-# Fixing Mistakes
+如果你添加 shim 路径 (例子: `$HOME/scoop/shims/mpv.exe`), 它会带来灾难.
 
-Once you add the shim for a program, Windows will not even let you let you add the proper path for it as an option anymore, presumably because it thinks that a program with the same basename (the shim) is already registered and so there's no need to add the new path.
+ - shim 在 "打开方式" 菜单中会显示为一个带丑陋 "未知" 图标的无名 blob.
+ - 当你注册了多个 shim 时, 它们将无法分辨.
+ - 所有关联文件也将永远被该图标所困扰.
+ - 有时, 启动程序后 shim 甚至不会自行关闭.
 
-If you have accidentally added a shim, you have to uninstall the package providing that shim and then try to open a file with that program, to trigger Windows into deleting the outdated entry. And then you can install the package again and add the proper path. Or you can do some manual registry hacking.
+# 修正错误
+
+一旦你为一个程序添加了 shim, Windows 甚至不会再让你为它添加正确的路径作为选项, 大概是因为它认为具有相同基本名称(shim)的程序已经注册, 所以没有需要添加新路径.
+
+如果你意外添加了 shim, 则必须卸载提供该 shim 的软件包, 然后尝试使用该程序打开文件, 以触发 Windows 删除过时的条目. 然后你可以再次安装该软件包并添加正确的路径. 或者你可以做一些手动注册表黑客.
 
 # Issues
 
-This method does not work across updates with programs that have unstable executable pathing, like GIMP (`bin/gimp-2.10.exe`)
+此方法不适用于具有不稳定可执行路径的程序的更新, 如 GIMP (`bin/gimp-2.10.exe`)
