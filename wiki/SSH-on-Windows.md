@@ -1,35 +1,43 @@
-This guide will help you use SSH on Windows to connect to an SSH server. You'll get a similar experience to how SSH works on Linux on MacOS. No PuTTy or GUIs required, and you can even set it up so you don't have to re-type your private key password every time you connect.
+本指南将帮助你在 Windows 上使用 SSH 连接到 SSH 服务器. 你将获得与 SSH 在 MacOS 或 Linux 上的工作方式类似的体验. 不需要 PuTTy 或 GUI, 甚至可以对其进行设置, 这样你就不必在每次连接时重新输入私钥密码.
 
-This guide assumes you have [installed Scoop](https://github.com/lukesampson/scoop/wiki/Quick-Start) and have a Linux machine running an SSH server—we'll need something to connect to. It also assumes that you're basically familiar with [what SSH is all about](http://en.wikipedia.org/wiki/Secure_Shell) and just want to know how to use it on Windows.
+本指南假设你已 [安装 Scoop](https://github.com/lukesampson/scoop/wiki/Quick-Start) 并有一台运行 SSH 服务器的 Linux 机器 — 我们需要一些东西来连接. 它还假设你基本熟悉 [SSH 是干什么的](http://en.wikipedia.org/wiki/Secure_Shell) 只想知道怎么在 Windows 上使用它.
 
-### Install
+### 安装
 
-> If you're using Windows 10 version 1803 (April 2018) or above, a built-in win32-openssh has been installed in your system and been added to the system PATH. You can run `scoop which ssh` to locate the ssh that you're using, and you can chose to skip external openssh installation.
+> 如果你使用的是 Windows 10 版本 1803（2018 年 4 月）或更高版本, 你的系统中已经安装了内置的 win32-openssh 并已添加到系统 PATH 中. 可以运行 `scoop which ssh` 来定位你正在使用的 ssh, 并且可以选择跳过外部 openssh 安装.
 
-First, install SSH from a Powershell prompt:
+首先, 从 Powershell 命令提示符安装 SSH:
 
-    scoop install openssh
+```command line
+scoop install openssh
+```
 
-P.S. if you want to use ssh with git, you may prefer to install `git-with-openssh` by `scoop install git-with-openssh`
+P.S. 如果你想在 git 中使用 ssh, 你可能更喜欢通过 `scoop install git-with-openssh` 安装 `git-with-openssh`
 
-Or, for the latest version of openssh:
+或者, 对于最新版本的 openssh:
 
-    scoop install win32-openssh
+```command line
+scoop install win32-openssh
+```
 
-### Connect with SSH using a password
+### 使用密码通过 SSH 连接
 
-Say you have a web server running at `example.org`. You should now be able to connect to it with
+假设你有一个在 `example.org` 运行的 Web 服务器. 你现在应该能够连接到它
 
-    ssh username@example.org
+```command line
+ssh username@example.org
+```
 
-Once you enter your password, you should be logged in to the remote server. Pat yourself on the back, you've connected with SSH from Windows! Easy, right?
+输入密码后, 你应该登录到远程服务器. 拍拍自己的背, 你已经从 Windows 连接了 SSH! 容易, 对吧?
 
-Passwords are fine, but for extra security we can use a password-protected key instead. Let's set that up now.
+密码很好, 但为了额外的安全性, 我们可以使用受密码保护的密钥. 让我们现在进行设置.
 
-### Create a key for authentication
-If you already have a private key (e.g. ~/.ssh/id_rsa) you can skip this step. If not, create a new private key like this (type text is in **bold**):
+### 创建用于身份验证的密钥
 
-<pre>PS> <b>ssh-keygen</b>
+如果你已经有私钥 (例如 ~/.ssh/id_rsa) 你可以跳过这步. 否则, 像这样创建一个新的私钥 (输入 **粗体** 文本):
+
+<pre>
+PS> <b>ssh-keygen</b>
 Generating public/private rsa key pair.
 Enter file in which to save the key (/c/Users/username//.ssh/id_rsa): <b>[enter]</b>
 Enter passphrase (empty for no passphrase): <b>your-super-secret-password</b>
@@ -52,51 +60,63 @@ The key's randomart image is:
 +-----------------+
 </pre>
 
-If you used the default file as above, your private key will be created at `~/.ssh/id_rsa` and your public key will be at `~/.ssh/id_rsa.pub`.
+如果你使用上述默认文件, 你的私钥会被创建在 `~/.ssh/id_rsa` 你的公钥会在 `~/.ssh/id_rsa.pub`.
 
-### Connect with an SSH key
+### 使用 SSH 密钥连接
 
-Before we can connect to our server (e.g. `example.org`) with our SSH key, we need to authorize the key we'll be using by copying our public key to the remote server:
+在我们可以用 SSH 密钥连接到我们的服务器之前 (例子 `example.org`), 需要通过将我们的公钥复制到远程服务器来授权我们将使用的密钥:
 
-    cat ~/.ssh/id_rsa.pub | ssh username@example.org 'mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys'
-
-Now try connecting again:
-
-    ssh username@example.org
-
-This time, instead of being asked for your `username` password, you should be asked for the password for your private key.
-
-### Better SSH experience with Pshazz
-
-Now, every time you restart your PC and open a console session you need to start the SSH Agent manually, and every time you connect with `ssh username@example.org` you'll be asked for the private key password.
-
-You can use [Pshazz](https://github.com/lukesampson/pshazz) to automatically start the SSH Agent and cache your the key passphrase.
-
-    scoop install pshazz
-
-Then Pshazz will start the SSH Agent automatically and add your keys. You'll be asked for the key passphrase for the first time. Try connecting over SSH:
-
-    ssh username@example.org
-
-If everything went according to plan, you should be logged in without needing to enter your password. Hooray!
-
-To see what happened, type:
-
-    ssh-add -l
-
-The thumbprint for your SSH key should be shown. `ssh-agent` will try using this key whenever you use SSH now.
-
-What's more, Pshazz support tab completion on `ssh` command:
-
-    ssh <TAB>
-
-You will see all hosts in your `~/.ssh/config`.
-
-You might notice that your SSH sessions are timing out. To prevent this I like to add a ServerAliveInterval to my ~/.ssh/config (you might need to create this file if it doesn't exist):
-
+```command line
+cat ~/.ssh/id_rsa.pub | ssh username@example.org 'mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys'
 ```
+
+现在尝试再次连接:
+
+```command line
+ssh username@example.org
+```
+
+这一次, 不是要求你输入 "用户名" 密码, 而是要求你输入私钥的密码.
+
+### 使用 Pshazz 获得更好的 SSH 体验
+
+现在, 每次重新启动 PC 并打开控制台会话时, 都需要手动启动 SSH 代理, 并且每次使用 `ssh username@example.org` 连接时, 系统都会要求你输入私钥密码.
+
+你可以用 [Pshazz](https://github.com/lukesampson/pshazz) 自动启动 SSH 代理并缓存你的密钥密码.
+
+```command line
+scoop install pshazz
+```
+
+然后 Pshazz 将自动启动 SSH 代理并添加你的密钥. 第一次会要求你输入密钥密码. 尝试通过 SSH 连接:
+
+```command line
+ssh username@example.org
+```
+
+如果一切按计划进行, 你应该无需输入密码即可登录. 万岁!
+
+要查看发生了什么, 请输入:
+
+```command line
+ssh-add -l
+```
+
+SSH 密钥的指纹应该会显示. `ssh-agent` 现在将在你使用 SSH 时尝试使用此密钥.
+
+更重要的是, Pshazz 支持 `ssh` 命令的 tab 补全:
+
+```command line
+    ssh <TAB>
+```
+
+你将在 `~/.ssh/config` 看到所有主机.
+
+你可能会注意到你的 SSH 会话超时. 为了防止这种情况, 我喜欢添加一个 ServerAliveInterval 到我的 ~/.ssh/config (如果此文件不存在, 你可能需要创建它):
+
+```command line
 Host *
     ServerAliveInterval 30
 ```
 
-This will send a null packet to the remote server every 30 seconds to keep the connection alive.
+这将每 30 秒向远程服务器发送一个空数据包以保持连接处于活动状态.

@@ -1,10 +1,10 @@
-The `current` directory for apps is a special alias directory which points to the currently installed version of that app.
+应用程序的 `current` 目录是一个特别的 alias/别名 目录, 指向该应用程序当前安装的版本.
 
-It allows path references to remain the same across app updates, since paths refer to the `current` directory alias rather than a hardcoded version directory.
+它允许路径引用在应用程序更新中保持不变, 因为路径引​​用的是 "current" 目录别名, 而不是硬编码的版本目录.
 
-![How the 'current' alias works](https://raw.githubusercontent.com/lukesampson/scoop/gh-pages/images/Junctions%20Overview.png)
+!['current' 别名如何工作](https://raw.githubusercontent.com/lukesampson/scoop/gh-pages/images/Junctions%20Overview.png)
 
-For example, if I run `ls ~/scoop/apps/git` now, I see this output:
+例如, 如果我现在运行 `ls ~/scoop/apps/git`, 我看到这个输出:
 
 ```powershell
 $ ls ~/scoop/apps/git
@@ -19,22 +19,23 @@ d-----           3/1/17   9:42 am                2.11.0.windows.1
 d----l           3/1/17   9:42 am                current
 ```
 
-The `2.10.2.windows.1` and `2.11.0.windows.1` directories are the installed versions of Git.
+`2.10.2.windows.1` 和 `2.11.0.windows.1` 目录是安装的 Git 版本.
 
-The `current` directory is not an additional directory, but a **Directory Junction**, pointing to the 2.11.0.windows.1 directory.
+`current` 目录不是附加目录, 而是 **Directory Junction**/目录连接, 指向 2.11.0.windows.1 目录.
 
-If you're paying close attention, you might notice the extra `l` in the `Mode` column of the output. But apart from that, you won't see much indication that it's any different from a normal directory.
+如果你密切注意, 你可能会注意到输出的 `Mode` 列中额外的 `l`. 但除此之外, 你不会看到太多迹象表明它与普通目录有任何不同.
 
-## What are Directory Junctions? ###
+## 什么是目录连接? ###
 
-If you're not familiar with directory junctions, you can think of them as similar to symbolic links, or even shortcuts. They are pointers to other locations in the file system. There are some important implementation differences between junctions and symbolic links, which you can read about [here](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365006(v=vs.85).aspx) if you're interested.
+如果你不熟悉目录连接, 可以将它们视为类似于符号链接, 甚至是快捷方式. 它们是指向文件系统中其他位置的指针. Junction 和符号链接之间存在一些重要的实现差异, 如果感兴趣你可以阅读[这个](https://msdn.microsoft.com/en-us/library/windows/desktop/aa365006(v=vs.85).aspx)
 
-The reason Scoop uses junctions instead of symbolic links is that symbolic links require admin permissions to create (although this [looks set to change soon](https://blogs.windows.com/buildingapps/2016/12/02/symlinks-windows-10/#cpLA6xrKTwb5fOf7.97)).
+Scoop 使用 junction 而不是符号链接的原因是符号链接需要管理员权限才能创建
+(虽然这 [看起来很快就会改变](https://blogs.windows.com/buildingapps/2016/12/02/symlinks-windows-10/#cpLA6xrKTwb5fOf7.97)).
 
-### Why Use a Junction? Aren't Shims Enough? ###
+### 为什么要使用 Junction？Shim 还不够吗? ###
 
-The main problem being addressed here is how to keep programs working smoothly between updates, even though the new program is in a different directory to the previous one. Shims do solve some of the problems here, by staying in the same place and updating the version that they point to.
+这里要解决的主要问题是如何保持程序在更新之间顺利运行, 即使新程序与前一个程序位于不同的目录中. Shims 确实解决了这里的一些问题, 方法是留在同一个地方并更新它们指向的版本.
 
-However, some programs need to set environment variables, registry settings or other configuration after installation that point to the actual install path. Before Scoop used `current` directory junctions, these variables and settings would be pointing to the old directory after an upgrade, which was not ideal. By using a `current` alias directory and updating the alias, the settings would continue to point to the right location.
+但是, 有些程序在安装后需要设置环境变量, 注册表设置或其他指向实际安装路径的配置. 在 Scoop 使用 `current` 目录连接之前, 这些变量和设置在升级后会指向旧目录, 这并不理想. 通过使用 `current` 别名目录并更新别名, 设置将继续指向正确的位置.
 
-![Why Junctions?](https://raw.githubusercontent.com/lukesampson/scoop/gh-pages/images/Junctions%20Comparison.png)
+![为何用 Junction?](https://raw.githubusercontent.com/lukesampson/scoop/gh-pages/images/Junctions%20Comparison.png)

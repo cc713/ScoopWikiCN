@@ -1,35 +1,39 @@
-### Why should you care about Scoop?
-If you identify with lots of the following statements, then Scoop has been designed with you in mind.
+### 为什么你应该关心 Scoop?
 
-* You're a programmer/developer
-* You want to set up a machine without having to visit a bunch of websites, download installers and then click through each one
-* You're comfortable working on the command line, especially with tools like Git
-* You're familiar with UNIX tools, and you wish there were more of them on Windows
-* You read Hacker News and you feel like you're 'stuck' on Windows and missing out on lots of cool things
-* You wish there was an easier way to tell other developers how to install programs (maybe your own programs)
-* You use Homebrew/apt-get and think, "this is awesome".
+如果你认同以下许多陈述, 那么 Scoop 的设计就是为你考虑的.
 
-### What can Scoop do for me?
-* Lets you script your development/production environment setup (repeatable!)
-* Installs tools so they 'just work', the way they work on other platforms (e.g. SSH)
-* Lets you stay on the command line, where you can work fast
-* Extends PowerShell so you can use programs that work really well with text, the universal interface.
-* Lets you sharpen skills that transfer to Linux and macOS
+* 你是个程序员/开发者
+* 你想设置一台机器, 而无需访问一堆网站, 下载安装程序, 然后逐个单击
+* 你习惯在命令行上工作, 尤其是使用 Git 之类的工具
+* 你熟悉 UNIX 工具, 并希望在 Windows 上有更多工具
+* 你阅读 Hacker News, 感觉自己 "卡在" Windows 上, 错过了很多很酷的东西
+* 你希望有一种更简单的方法来告诉其他开发人员如何安装程序(可能是你自己的程序)
+* 你使用 Homebrew/apt-get 并想, "这太棒了".
 
-### But I already use X, why should I use Scoop?
-There are similar tools available, like [Chocolatey](http://chocolatey.org), [Ninite](http://ninite.com) and [CoApp](http://coapp.org). While there's a more in-depth comparison with Chocolatey [here](Chocolatey-Comparison), here are some general reasons why you might like to try Scoop.
+### Scoop 能为我做什么?
+
+* 让你编写开发/生产环境设置脚本 (可重复!)
+* 安装工具，使它们 "正常工作", 就像它们在其他平台上的工作方式一样 (例如 SSH)
+* 让你留在命令行上, 在那里你可以快速工作
+* 扩展 PowerShell, 因此你可以使用与文本(通用界面)完美配合的程序.
+* 让你提高转移到 Linux 和 macOS 的技能
+
+### 但我已经使用 X, 为什么我应该用 Scoop?
+
+有类似的工具可用, 像 [Chocolatey](http://chocolatey.org), [Ninite](http://ninite.com) and [CoApp](http://coapp.org). 虽然与 Chocolatey [这里](Chocolatey-Comparison)有更深入的比较, 以下是你可能想尝试 Scoop 的一些一般原因.
 
 Scoop:
-* avoids GUIs whenever possible, keeps you on the command line
-* installs to your home directory by default (thereby avoiding UAC popups, and other people messing up your setup)
-* installs applications independently and in a self-contained way (which means less conflicts, easy to undo installs)
-* doesn't pollute your path
-* has a command interface similar to Git and similar tools
-* makes it easy to discover commands that you don't know, or have forgotten
-* makes it easy to tell people how to install your programs
-* has a curated collection of apps, while at the same time...
-* makes it easy to create your own apps and collections of apps
-* values your time and attention
-* reads the README for you
 
-There are other, less objective reasons to give Scoop a try. Maybe you want to be able to install apps without Admin privileges. Maybe you like Chocolatey but you don't like the name, or typing `cinst` feels weird, or you're not a fan of messages about 'Chocolatey gods'.
+* 尽可能避免使用 GUI, 让你始终使用命令行
+* 默认安装到主目录(从而避免 UAC 弹出窗口和其他人弄乱你的设置)
+* 以独立的方式独立安装应用程序 (这意味着更少的冲突, 易于撤消安装)
+* 不污染你的路径
+* 具有类似于 Git 的命令界面和类似的工具
+* 可以轻松发现你不知道或忘记的命令
+* 可以很容易地告诉人们如何安装你的程序
+* 有一系列精选的应用程序, 同时...
+* 可以轻松创建自己的应用程序和应用程序集合
+* 重视你的时间和注意力
+* 替你读 README
+
+还有其他不那么客观的理由让你尝试 Scoop. 也许你希望能够在没有管理员权限的情况下安装应用程序. 也许你喜欢 Chocolatey 但你不喜欢这个名字, 或者输入 `cinst` 感觉很奇怪, 或者你不喜欢关于 `Chocolatey gods` 的信息.
