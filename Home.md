@@ -21,7 +21,7 @@
   * [创建应用清单](wiki/Creating-an-app-manifest.md)
   * [Autoupdate/自动更新](wiki/App-Manifest-Autoupdate.md)
   * [Persistent data/保留数据](wiki/Persistent-data.md)
-  * [安装前和安装后脚本](Pre--and-Post-install-scripts.md)
+  * [安装前和安装后脚本](wiki/Pre--and-Post-install-scripts.md)
 * [Dependencies/依赖](wiki/Dependencies.md)
 * [作出贡献](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md)
 * ['Current'/当前版本别名](wiki/The-'Current'-Version-Alias.md)
