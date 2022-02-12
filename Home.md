@@ -38,7 +38,7 @@
 
 ## 杂项
 
-* [防病毒误报](Antivirus-false-positive.md)
+* [防病毒误报](wiki/Antivirus-false-positive.md)
 * [我可以在 Bash,Zsh 和其他中用 Scoop 吗?](wiki/Can-I-Use-Scoop-in-Bash,-Zsh,-etc.md)
 * [实例安装脚本](wiki/Example-Setup-Scripts.md)
 * [文件夹布局](wiki/Scoop-Folder-Layout.md)
