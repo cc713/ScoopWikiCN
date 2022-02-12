@@ -25,4 +25,4 @@
 * **对原始类型, 数组和散列的强大语言支持**
 * **使用不起眼的 shell 带来的自豪感**. Zsh? Fish? Pfft(语气词, 表示中止). 几乎 *没人* 使用 PowerShell(不确定实际数字).
 
-是的, 你一直在使用古老且看似已被遗忘的 Windows 控制台, 但你可以通过 [一点自定义](https://github.com/lukesampson/scoop/wiki/Theming-Powershell) 很好地使用它.
+是的, 你一直在使用古老且看似已被遗忘的 Windows 控制台, 但你可以通过 [一点自定义](https://github.com/ScoopInstaller/scoop/wiki/Theming-Powershell) 很好地使用它.

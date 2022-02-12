@@ -7,4 +7,4 @@
 * **比打包简单.** Scoop 不是包管理器, 而是读取描述如何安装程序及其依赖项的纯 JSON 清单.
 * **更简单的 app 存储库.** Scoop 的 app 存储库只使用 Git. 你可以创建自己的存储库, 甚至只是一个描述要安装的应用程序的文件.
 
-**注意** 虽然用 Scoop 安装 Skype 很容易, 但这可能永远不会出现在 Scoop 的 main bucket(应用程序存储库)中. Scoop 专注于开源的命令行开发工具. [scoop-extras](https://github.com/lukesampson/scoop-extras) bucket 是为非开发者工具准备的.
+**注意** 虽然用 Scoop 安装 Skype 很容易, 但这可能永远不会出现在 Scoop 的 main bucket(应用程序存储库)中. Scoop 专注于开源的命令行开发工具. [scoop-extras](https://github.com/ScoopInstaller/scoop-extras) bucket 是为非开发者工具准备的.

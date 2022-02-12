@@ -6,13 +6,13 @@ Scoop 有一个与 Scoop 捆绑在一起的 [main bucket](https://github.com/Sco
 
 默认情况下, 当你运行 `scoop install <app>` 时, 它会在 main bucket 中查找, 但也可以从其他 bucket 安装.
 
-有一个可选的 [extras bucket](https://github.com/lukesampson/scoop-extras) 包含不太符合 [main bucket 标准](https://github.com/lukesampson/scoop/wiki/Criteria-for-including-apps-in-the-main-bucket)的应用程序, 但仍然很好. 还有一个可选的 [versions](https://github.com/ScoopInstaller/Versions) bucket, 其中包含一些知名软件包的旧版本.
+有一个可选的 [extras bucket](https://github.com/ScoopInstaller/scoop-extras) 包含不太符合 [main bucket 标准](https://github.com/ScoopInstaller/scoop/wiki/Criteria-for-including-apps-in-the-main-bucket)的应用程序, 但仍然很好. 还有一个可选的 [versions](https://github.com/ScoopInstaller/Versions) bucket, 其中包含一些知名软件包的旧版本.
 
 并且 Scoop 支持添加其他 buckets. 任何人都可以使用自己的应用集设置自己的 bucket, 其他人可以从该 bucket 添加和安装 — 他们只需要知道 bucekt 的 Git 存储库的位置.
 
 ### Known buckets/已知存储桶
 
-社区有一个 known buckets 列表, 可以在 [`buckets.json`](https://github.com/lukesampson/scoop/blob/master/buckets.json) 中查看, 要查看 known buckets 列表执行:
+社区有一个 known buckets 列表, 可以在 [`buckets.json`](https://github.com/ScoopInstaller/scoop/blob/master/buckets.json) 中查看, 要查看 known buckets 列表执行:
 
 ```command line
 scoop bucket known
@@ -26,12 +26,12 @@ scoop bucket known
 scoop bucket add extras
 ```
 
-'extras' 桶是一个 [特殊 bucket](https://github.com/lukesampson/scoop/blob/master/buckets.json), 因为它是 "known", 即 Scoop 已经知道这个 bucket 在哪里, 不必指定其位置.
+'extras' 桶是一个 [特殊 bucket](https://github.com/ScoopInstaller/scoop/blob/master/buckets.json), 因为它是 "known", 即 Scoop 已经知道这个 bucket 在哪里, 不必指定其位置.
 
 假设 extras bucket 并非 known, 你添加它的方式是:
 
 ```command line
-scoop bucket add extras https://github.com/lukesampson/scoop-extras.git
+scoop bucket add extras https://github.com/ScoopInstaller/scoop-extras.git
 ```
 
 也就是,
@@ -59,7 +59,7 @@ scoop bucket add <name-of-bucket> <location-of-git-repo>
 ```powershell
 git clone https://github.com/<your-username>/my-bucket
 cd my-bucket
-'{ version: "1.0", url: "https://gist.github.com/lukesampson/6446238/raw/hello.ps1", bin: "hello.ps1" }' > hello.json
+'{ version: "1.0", url: "https://gist.github.com/ScoopInstaller/6446238/raw/hello.ps1", bin: "hello.ps1" }' > hello.json
 git add .
 git commit -m "add hello app"
 git push

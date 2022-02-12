@@ -2,7 +2,7 @@ Git for Windows 带有一个 "Git Bash", 它通过 SSH 为你提供良好的 Git
 
 本指南使用 Github 作为示例, 但相同的原则适用于任何 SSH 可访问的 Git 存储库.
 
-假设你已经 [安装了 Scoop](https://github.com/lukesampson/scoop/wiki/Quick-Start), 且对 Git 有基本知识.
+假设你已经 [安装了 Scoop](https://github.com/ScoopInstaller/scoop/wiki/Quick-Start), 且对 Git 有基本知识.
 
 *基于 [来自 GitHub 的这个指南](https://help.github.com/articles/generating-ssh-keys#platform-windows)*
 

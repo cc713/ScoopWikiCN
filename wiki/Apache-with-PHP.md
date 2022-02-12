@@ -18,7 +18,7 @@ httpd
 
 Apache 会在你按 `Ctrl-C` 中止前一直运行.
 
-如果你在浏览器打开 http://localhost, 你应该看到一个页面写着 &ldquo;It works!&rdquo;.
+如果你在浏览器打开 http://localhost, 你应该看到一个页面写着 "It works!".
 
 ## 文档根目录
 

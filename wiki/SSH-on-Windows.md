@@ -1,6 +1,6 @@
 本指南将帮助你在 Windows 上使用 SSH 连接到 SSH 服务器. 你将获得与 SSH 在 MacOS 或 Linux 上的工作方式类似的体验. 不需要 PuTTy 或 GUI, 甚至可以对其进行设置, 这样你就不必在每次连接时重新输入私钥密码.
 
-本指南假设你已 [安装 Scoop](https://github.com/lukesampson/scoop/wiki/Quick-Start) 并有一台运行 SSH 服务器的 Linux 机器 — 我们需要一些东西来连接. 它还假设你基本熟悉 [SSH 是干什么的](http://en.wikipedia.org/wiki/Secure_Shell) 只想知道怎么在 Windows 上使用它.
+本指南假设你已 [安装 Scoop](https://github.com/ScoopInstaller/scoop/wiki/Quick-Start) 并有一台运行 SSH 服务器的 Linux 机器 — 我们需要一些东西来连接. 它还假设你基本熟悉 [SSH 是干什么的](http://en.wikipedia.org/wiki/Secure_Shell) 只想知道怎么在 Windows 上使用它.
 
 ### 安装
 
@@ -82,7 +82,7 @@ ssh username@example.org
 
 现在, 每次重新启动 PC 并打开控制台会话时, 都需要手动启动 SSH 代理, 并且每次使用 `ssh username@example.org` 连接时, 系统都会要求你输入私钥密码.
 
-你可以用 [Pshazz](https://github.com/lukesampson/pshazz) 自动启动 SSH 代理并缓存你的密钥密码.
+你可以用 [Pshazz](https://github.com/ScoopInstaller/pshazz) 自动启动 SSH 代理并缓存你的密钥密码.
 
 ```command line
 scoop install pshazz

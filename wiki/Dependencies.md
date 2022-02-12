@@ -32,7 +32,7 @@ rust
 
 ##### 安装时依赖 vs 运行时依赖
 
-运行时的依赖性是通过 [应用清单](https://github.com/lukesampson/scoop/wiki/App-Manifests) 中的 `depends` 设置指定的. 安装时的依赖是根据应用清单中的 "url" 文件扩展名来检测的.
+运行时的依赖性是通过 [应用清单](https://github.com/ScoopInstaller/scoop/wiki/App-Manifests) 中的 `depends` 设置指定的. 安装时的依赖是根据应用清单中的 "url" 文件扩展名来检测的.
 
 Scoop 对这些的处理是不同的, 例如 `scoop status` 只显示缺少 **运行时** 依赖的警告.
 

@@ -110,7 +110,7 @@ scoop install bucket\<app>.json
 
 ## 在 `checkver` 中同时使用正则表达式和 JSONPath
 
-如果 `checkver.regex` 和 `checkver.jsonpath` 都被赋值, **scoop** 用 `checkver.jsonpath` 提取匹配 `checkver.regex` 的字符串查找版本. 例子: [nwjs](https://github.com/lukesampson/scoop-extras/blob/master/bucket/nwjs.json)
+如果 `checkver.regex` 和 `checkver.jsonpath` 都被赋值, **scoop** 用 `checkver.jsonpath` 提取匹配 `checkver.regex` 的字符串查找版本. 例子: [nwjs](https://github.com/ScoopInstaller/scoop-extras/blob/master/bucket/nwjs.json)
 
 ```json
 "checkver": {
@@ -148,7 +148,7 @@ scoop install bucket\<app>.json
 }
 ```
 
-在 `checkver.regex` 中使用捕获组会让 [捕获变量](#captured-variables) 可用于 `checkver.replace` 匹配复杂版本 或 [`autoupdate`](#adding-autoupdate-to-a-manifest) 属性.
+在 `checkver.regex` 中使用捕获组会让 [捕获变量](#捕获变量) 可用于 `checkver.replace` 匹配复杂版本 或 [`autoupdate`](#添加-autoupdate-到清单) 属性.
 
 这个例子会提供 `$matchVersion` 和 `$matchShort` 作为变量 (用于 `autoupdate`). 例子: [git](https://github.com/ScoopInstaller/Main/blob/master/bucket/git.json)
 
@@ -163,7 +163,7 @@ scoop install bucket\<app>.json
 
 ```json
 "checkver": {
-    "url": "https://github.com/lukesampson/pshazz/commits/master.atom",
+    "url": "https://github.com/ScoopInstaller/pshazz/commits/master.atom",
     "re": "(\\d+)-(\\d+)-(\\d+)[\\S\\s]*?(?<sha>[0-9a-f]{40})",
     "replace": "0.${1}.${2}.${3}"
 }
@@ -174,14 +174,14 @@ scoop install bucket\<app>.json
 - `checkver`: "regex". 正则表达式用于在 `homepage` 查找 version/版本
   - `github`: "uri". 指向 app Github repository/存储库的 URL
   - `url`: "uri". 可以找到 version/版本的页面
-    - 支持 [version/版本 变量](#version-variables)
+    - 支持 [version/版本 变量](#版本变量)
   - `regex|re`: "regex". 用于查找版本的正则表达式
   - `jsonpath|jp`: "jsonpath". 用于查找版本的 JSONPath 表达式
   - `xpath`: "string". 用于查找版本的 XPath 表达式
   - `reverse`: "boolean". 是否匹配最后一次出现
   - `replace`: "string". 替换匹配值为计算值
-    - 支持 [捕获变量](#captured-variables)
-  - `useragent`: "string". 用于获取网页内容的 User-Agent/用户代理 (仅用于 [fiddler](https://github.com/lukesampson/scoop-extras/blob/master/bucket/fiddler.json))
+    - 支持 [捕获变量](#捕获变量)
+  - `useragent`: "string". 用于获取网页内容的 User-Agent/用户代理 (仅用于 [fiddler](https://github.com/ScoopInstaller/scoop-extras/blob/master/bucket/fiddler.json))
     - 支持 [版本变量](#版本变量)
 
 # 添加 `autoupdate` 到清单
@@ -311,13 +311,11 @@ scoop install bucket\<app>.json
 
 ## `autoupdate` 的属性
 
-大多数 [清单属性](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests) 可添加到 `autoupdate`: `bin`, `extract_dir`, `extract_to`, `env_add_path`, `env_set`, `installer`, `license`, `note`, `persist`, `post_install`, `psmodule`, `shortcuts`, and the most important ones, `url` 和 `hash`.
+大多数 [清单属性](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests) 可添加到 `autoupdate`: `bin`, `extract_dir`, `extract_to`, `env_add_path`, `env_set`, `installer`, `license`, `note`, `persist`, `post_install`, `psmodule`, `shortcuts`, 包括最重要的 `url` 和 `hash`.
 
 除 `autoupdate.note` 之外的所有属性都可以为所有架构全局设置, 也可以为每个架构单独设置(在 `architecture.64bit` 或 `architecture.32bit` 下). 全局属性可用于更新每个架构属性, 即如果仅全局设置, 则 `autoupdate.url` 用于更新 `architecture.64bit.url` 或 `architecture.32bit.url`.
 
-All the properties except `hash` support [captured variables](#captured-variables) and [version variables](#version-variables), and `hash` has its own [property](#adding-hash-to-autoupdate) for obtaining hash values without download the actual files.
-
-除了 `hash` 之外的所有属性都支持 [捕获变量](#捕获变量) 和 [版本变量](#version-variables), 并且 `hash` 有自己的 [属性](#添加-hash-到-autoupdate)用于在不下载实际文件的情况下获取哈希值.
+除了 `hash` 之外的所有属性都支持 [捕获变量](#捕获变量) 和 [版本变量](#版本变量), 并且 `hash` 有自己的 [属性](#添加-hash-到-autoupdate)用于在不下载实际文件的情况下获取哈希值.
 
 # 添加 `hash` 到 `autoupdate`
 
@@ -439,7 +437,7 @@ abcdef0123456789abcdef0123456789abcdef01 *example.zip
 }
 ```
 
-- [nsis](https://github.com/lukesampson/scoop-extras/blob/master/bucket/nsis.json)
+- [nsis](https://github.com/ScoopInstaller/scoop-extras/blob/master/bucket/nsis.json)
 
 ```json
 "autoupdate": {
@@ -494,7 +492,7 @@ abcdef0123456789abcdef0123456789abcdef01 *example.zip
 
 ## 从 Metalink 获取 hash
 
-[Metalink](http://www.metalinker.org/) 是一种互联网标准, 它利用对等网络的速度和功能以及单击一次即可进行的传统下载. 对于支持 Metalink 的下载 URL, 可以从下载 URL 的 header/头或 `.meta4` 文件中检索 hash 值. 例子: [libreoffice-fresh](https://github.com/lukesampson/scoop-extras/blob/master/bucket/libreoffice-fresh.json)
+[Metalink](http://www.metalinker.org/) 是一种互联网标准, 它利用对等网络的速度和功能以及单击一次即可进行的传统下载. 对于支持 Metalink 的下载 URL, 可以从下载 URL 的 header/头或 `.meta4` 文件中检索 hash 值. 例子: [libreoffice-fresh](https://github.com/ScoopInstaller/scoop-extras/blob/master/bucket/libreoffice-fresh.json)
 
 ```json
 "hash": {
@@ -516,7 +514,7 @@ abcdef0123456789abcdef0123456789abcdef01 *example.zip
   - `sourceforge`: *自动*. 为 SourceForge 预定义
   - `download`: 下载应用在本地计算 hash (备用)
 - `url`: "uri". URL 模板, 用于下载 RDF/JSON 文件或提取 hash
-  - 支持 [捕获变量](#captured-variables)
+  - 支持 [捕获变量](#捕获变量)
   - 支持 [版本变量](#版本变量)
   - 支持 [UURL 变量](#url-变量)
 - `regex|find`: "regex". 用于提取 hash 的正则表达式

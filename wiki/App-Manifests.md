@@ -5,7 +5,7 @@
 ```json
 {
     "version": "1.0",
-    "url": "https://github.com/lukesampson/cowsay-psh/archive/master.zip",
+    "url": "https://github.com/ScoopInstaller/cowsay-psh/archive/master.zip",
     "extract_dir": "cowsay-psh-master",
     "bin": "cowsay.ps1"
 }
@@ -32,24 +32,24 @@
 - `##`: 包含注释的单行字符串或字符串数​​组.
 - `architecture`: 如果应用程序具有 32 位和 64 位版本, 则可以使用 architecture 来包装差异 ([例子](https://github.com/ScoopInstaller/Main/blob/master/bucket/7zip.json)).
   - `32bit|64bit`: 包含特定于架构的指令 (`bin`, `checkver`, `extract_dir`, `hash`, `installer`,  `pre_install`, `post_install`, `shortcuts`, `uninstaller`, `url`, 和 `msi` [`msi` 已废弃]).
-- [`autoupdate`](App-Manifest-Autoupdate#adding-autoupdate-to-a-manifest): 定义清单怎样自动更新.
+- [`autoupdate`](App-Manifest-Autoupdate.md#添加-autoupdate-到清单): 定义清单怎样自动更新.
 - `bin`: 要在用户路径上可用的程序(可执行文件或脚本)字符串或字符串数​​组.
   - 你还可以创建一个别名 shim, 它使用与实际可执行文件不同的名称并(可选)将参数传递给可执行文件. 而不是仅仅为可执行文件使用一个字符串, 用例: `[ "program.exe", "alias", "--arguments" ]`. 例子见 [busybox](https://github.com/ScoopInstaller/Main/blob/master/bucket/busybox.json).
   - 但是, 如果你像这样声明一个 shim, 则必须确保它包含在外部数组中, 例如:
       `"bin": [ [ "program.exe", "alias" ] ]`. 否则它将被读取为多个单独 shim.
-- [`checkver`](App-Manifest-Autoupdate#adding-checkver-to-a-manifest): App 维护者和开发者可使用 [bin/checkver](https://github.com/lukesampson/scoop/blob/master/bin/checkver.ps1) 工具检查 app 的更新版本. 清单中的 `checkver` 属性是一个正则表达式, 可用于匹配应用主页中应用的当前稳定版本. 例如, 见 [go](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json) 清单. 如果主页没有当前版本的可靠指示, 你还可以指定不同的 URL 进行检查 — 例如见 [ruby](https://github.com/ScoopInstaller/Main/blob/master/bucket/ruby.json) 清单.
+- [`checkver`](App-Manifest-Autoupdate#adding-checkver-to-a-manifest): App 维护者和开发者可使用 [bin/checkver](https://github.com/ScoopInstaller/scoop/blob/master/bin/checkver.ps1) 工具检查 app 的更新版本. 清单中的 `checkver` 属性是一个正则表达式, 可用于匹配应用主页中应用的当前稳定版本. 例如, 见 [go](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json) 清单. 如果主页没有当前版本的可靠指示, 你还可以指定不同的 URL 进行检查 — 例如见 [ruby](https://github.com/ScoopInstaller/Main/blob/master/bucket/ruby.json) 清单.
 - `depends`: 将自动安装的应用程序的运行时依赖项. 另请参阅 `suggest` (下文)以获取 `depends` 的替代方案.
 - `env_add_path`: 将此目录添加到用户路径(或系统路径, 如果使用了 `--global`). 该目录是相对于安装目录的, 并且必须在安装目录中.
 - `env_set`: 为用户(或系统, 如果使用 `--global`)设置一个或多个环境变量([示例](https://github.com/ScoopInstaller/Main/blob/master/bucket/go.json)).
 - `extract_dir`: 如果 `url` 指向压缩文件(支持 .zip, .7z, .tar, .gz, .lzma 和 .lzh), Scoop 将仅提取其中指定的目录.
-- `extract_to`: 如果 `url` 指向一个压缩文件(支持 .zip, .7z, .tar, .gz, .lzma 和 .lzh), Scoop 会将所有内容提取到指定目录([例子](https://github.com/lukesampson/scoop-extras/blob/master/bucket/irfanview.json)).
+- `extract_to`: 如果 `url` 指向一个压缩文件(支持 .zip, .7z, .tar, .gz, .lzma 和 .lzh), Scoop 会将所有内容提取到指定目录([例子](https://github.com/ScoopInstaller/scoop-extras/blob/master/bucket/irfanview.json)).
 - `hash`: `url` 中每个 URL 的文件哈希的字符串或字符串数​​组. 哈希默认为 SHA256, 但你可以使用 SHA512, SHA1 或 MD5, 方法是在哈希字符串前面加上 "sha512:", "sha1:" 或 "md5:".
 - `innosetup`: 如果安装程序基于 InnoSetup, 将此值设为布尔值 `true` (无引号).
 - `installer`: 运行非 MSI 安装程序的指令.
   - `file`: 安装程序可执行文件. 对于 `installer` 默认为最后下载的 URL. 必须为 `uninstaller` 指定.
   - `script`: 要作为安装程序/卸载程序而不是 "文件" 执行的命令, 单行字符串或字符串数​​组.
     - `args`: 要传递给安装程序的参数数组. 可选.
-  - `keep`: `"true"` 安装程序是否应该在运行后保留(例如, 以备将来卸载). 如果省略或设置为任何其他值, 安装程序将在运行后被删除. 例子见 [`extras/oraclejdk`](https://github.com/lukesampson/scoop-extras/blob/master/oraclejdk.json). 在 `uninstaller` 指令中使用此选项时将被忽略.
+  - `keep`: `"true"` 安装程序是否应该在运行后保留(例如, 以备将来卸载). 如果省略或设置为任何其他值, 安装程序将在运行后被删除. 例子见 [`extras/oraclejdk`](https://github.com/ScoopInstaller/scoop-extras/blob/master/oraclejdk.json). 在 `uninstaller` 指令中使用此选项时将被忽略.
   - `script` 和 `args` 可用的变量: `$fname` (上次下载的文件), `$manifest` (反序列化的清单引用), `$architecture` (`64bit` 或 `32bit`), `$dir`(安装目录)
   - 在 `scoop install` 和 `scoop upgrade` 时都调用.
 - `notes`: 单行字符串或字符串数​​组, 在安装应用程序后显示一条消息.
@@ -58,9 +58,9 @@
 - `pre_install`: 与 `post_install` 相同的选项, 但在安装应用程序之前执行.
 - `psmodule`: 安装为 `~/scoop/modules` 中的 PowerShell module/PowerShell 模块.
   - `name` (`psmodule` 必需): 模块的名称, 它应该与提取目录中的至少一个文件匹配, 以便 PowerShell 将其识别为模块.
-- `shortcuts`: 指定在开始菜单中可用的快捷方式. 例子见 [sourcetree](https://github.com/lukesampson/scoop-extras/blob/master/bucket/sourcetree.json). 该数组必须包含一个可执行文件/标签对. 第 3,4 个元素是可选的.
+- `shortcuts`: 指定在开始菜单中可用的快捷方式. 例子见 [sourcetree](https://github.com/ScoopInstaller/scoop-extras/blob/master/bucket/sourcetree.json). 该数组必须包含一个可执行文件/标签对. 第 3,4 个元素是可选的.
   1. 到目标文件的路径 [必需]
-  1. 快捷方式的名称(支持子目录: `<AppsSubDir>\\<AppShortcut>` 例如 [sysinternals](https://github.com/lukesampson/scoop-extras/blob/master/bucket/sysinternals.json))[必需]
+  1. 快捷方式的名称(支持子目录: `<AppsSubDir>\\<AppShortcut>` 例如 [sysinternals](https://github.com/ScoopInstaller/scoop-extras/blob/master/bucket/sysinternals.json))[必需]
   1. 启动参数 [可选]
   1. 图标文件路径 [可选]
 - `suggest`: 显示一条消息, 建议提供补充功能的可选应用程序. 例子见 [ant](https://github.com/ScoopInstaller/Main/blob/master/bucket/ant.json).

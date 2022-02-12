@@ -76,6 +76,6 @@ scoop uninstall git
 
 ### Scoop 安装时非常缓慢, 锁定 CPU, 或显示 access denied errors
 
-在提取文件时, 你的防病毒或反恶意软件程序可能正在执行实时扫描. 更多信息和可能的解决方法参见 [Antivirus and Anti-Malware Problems](https://github.com/lukesampson/scoop/wiki/Antivirus-and-Anti-Malware-Problems).
+在提取文件时, 你的防病毒或反恶意软件程序可能正在执行实时扫描. 更多信息和可能的解决方法参见 [Antivirus and Anti-Malware Problems](https://github.com/ScoopInstaller/scoop/wiki/Antivirus-and-Anti-Malware-Problems).
 
 *[todo: 在这插入更多 FAQ]*

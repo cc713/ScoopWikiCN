@@ -24,7 +24,7 @@
 | `$oldscoopdir`  | `C:\Users\username\AppData\Local\scoop`      | 
 | `$scoopdir`     | `C:\Users\username\scoop`                    | 基本 Scoop 安装目录 (通常是 `%USERPROFILE%\scoop`, `%SCOOP% 会覆盖)
 
-(_详情检查 [`lib/install`](https://github.com/lukesampson/scoop/blob/master/lib/install.ps1) 脚本_)
+(_详情检查 [`lib/install`](https://github.com/ScoopInstaller/scoop/blob/master/lib/install.ps1) 脚本_)
 
 ## 函数
 

@@ -21,7 +21,7 @@ scoop install python ruby go nodejs
 # WAMP stack/WAMP(Windows Apache MariaDB PHP) 栈
 
 scoop install apache mariadb php
-iex (new-object net.webclient).downloadstring('https://gist.github.com/lukesampson/6546858/raw/apache-php-init.ps1')
+iex (new-object net.webclient).downloadstring('https://gist.github.com/ScoopInstaller/6546858/raw/apache-php-init.ps1')
 
 # console theme/控制台主题
 

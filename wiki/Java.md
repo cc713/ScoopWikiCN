@@ -91,9 +91,9 @@ scoop install adoptopenjdk-openj9-jre
 今天有两种解决方案可用于切换 java:
 
 1. `scoop reset <java>[@<version>]`
-2. 用 [extras](https://github.com/lukesampson/scoop-extras) 中的 [find-java](https://github.com/lukesampson/scoop-extras/blob/master/bucket/find-java.json)
+2. 用 [extras](https://github.com/ScoopInstaller/scoop-extras) 中的 [find-java](https://github.com/ScoopInstaller/scoop-extras/blob/master/bucket/find-java.json)
 
-`scoop reset` 非常适合当前会话, 并且还会更新用户路径. 请注意 https://github.com/lukesampson/scoop/issues/3822 - 目前这不能用于所有可用的软件包.
+`scoop reset` 非常适合当前会话, 并且还会更新用户路径. 请注意 https://github.com/ScoopInstaller/scoop/issues/3822 - 目前这不能用于所有可用的软件包.
 
 全局安装的 java 优先于用户安装的 java, 因此运行 `sudo scoop install -g oraclejdk-lts` 将安装一个始终默认用于新会话的 java.
 

@@ -6,7 +6,7 @@
 
 ```powershell
 # write an app manifest to hello.json
-'{ "version": "1.0", "url": "https://gist.github.com/lukesampson/6446238/raw/hello.ps1", "bin": "hello.ps1" }' > hello.json
+'{ "version": "1.0", "url": "https://gist.github.com/ScoopInstaller/6446238/raw/hello.ps1", "bin": "hello.ps1" }' > hello.json
 
 # install the app
 scoop install hello
@@ -27,10 +27,10 @@ scoop install \\shared\files\scoop\hello.json
 
 ##### 与世界分享
 
-如果你在网络上公开你的应用清单, 任何人只要知道 URL 就可以安装它. 例如, 我为 hello.json 制作了一个 GitHub gist 在 [这](https://gist.github.com/lukesampson/6446567). 现在任何人都可以安装它:
+如果你在网络上公开你的应用清单, 任何人只要知道 URL 就可以安装它. 例如, 我为 hello.json 制作了一个 GitHub gist 在 [这](https://gist.github.com/ScoopInstaller/6446567). 现在任何人都可以安装它:
 
 ```command line
-scoop install https://gist.github.com/lukesampson/6446567/raw/hello.json
+scoop install https://gist.github.com/ScoopInstaller/6446567/raw/hello.json
 ```
 
 ### 下一步

@@ -2,7 +2,7 @@
 
 它允许路径引用在应用程序更新中保持不变, 因为路径引​​用的是 "current" 目录别名, 而不是硬编码的版本目录.
 
-!['current' 别名如何工作](https://raw.githubusercontent.com/lukesampson/scoop/gh-pages/images/Junctions%20Overview.png)
+!['current' 别名如何工作](https://raw.githubusercontent.com/ScoopInstaller/scoop/gh-pages/images/Junctions%20Overview.png)
 
 例如, 如果我现在运行 `ls ~/scoop/apps/git`, 我看到这个输出:
 
@@ -38,4 +38,4 @@ Scoop 使用 junction 而不是符号链接的原因是符号链接需要管理�
 
 但是, 有些程序在安装后需要设置环境变量, 注册表设置或其他指向实际安装路径的配置. 在 Scoop 使用 `current` 目录连接之前, 这些变量和设置在升级后会指向旧目录, 这并不理想. 通过使用 `current` 别名目录并更新别名, 设置将继续指向正确的位置.
 
-![为何用 Junction?](https://raw.githubusercontent.com/lukesampson/scoop/gh-pages/images/Junctions%20Comparison.png)
+![为何用 Junction?](https://raw.githubusercontent.com/ScoopInstaller/scoop/gh-pages/images/Junctions%20Comparison.png)
