@@ -29,11 +29,11 @@ persist 数据通过目录连接或硬链接从已安装的应用程序目录链
 
 ### 例子
 
-- [MySQL](/ScoopInstaller/Main/blob/master/bucket/mysql.json)
-- [MariaDB](/ScoopInstaller/Main/blob/master/bucket/mariadb.json)
-- [NGINX](/ScoopInstaller/Main/blob/master/bucket/nginx.json)
-- [node.js](/ScoopInstaller/Main/blob/master/bucket/nodejs.json)
-- [PHP](/ScoopInstaller/Main/blob/master/bucket/php.json)
+- [MySQL](https://github.com/ScoopInstaller/Main/blob/master/bucket/mysql.json)
+- [MariaDB](https://github.com/ScoopInstaller/Main/blob/master/bucket/mariadb.json)
+- [NGINX](https://github.com/ScoopInstaller/Main/blob/master/bucket/nginx.json)
+- [node.js](https://github.com/ScoopInstaller/Main/blob/master/bucket/nodejs.json)
+- [PHP](https://github.com/ScoopInstaller/Main/blob/master/bucket/php.json)
 
 ## 卸载
 
